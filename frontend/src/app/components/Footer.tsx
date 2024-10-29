@@ -1,27 +1,29 @@
-import { Github, Telegram, Twitter } from "@/assets/landing-page";
 import { poppins, roboto } from "../fonts";
 import Link from "next/link";
+import { GithubIcon, TelegramIcon, TwitterIcon } from "@/assets/icons";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#171717]">
-      <div className="container mx-auto">
+    <footer className="bg-[#303030] lg:bg-[#171717]">
+      <div className="container mx-auto pt-12 px-6 lg:p-0 lg:px-4">
+        {/* <div className="mt-12" /> */}
         <h5
           className={`${poppins.variable} text-center text-textPrimary
-          text-[2rem] leading-[6rem] font-medium`}
+          mb-6 lg:my-0 text-2xl font-medium
+          lg:text-[2rem] lg:leading-[6rem] lg:font-medium font-roboto`}
         >
           Get in touch with us. We&apos;re here to assist you.
         </h5>
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col lg:flex-row justify-center lg:justify-between items-center">
           <p
-            className={`${roboto.variable} text-textPrimary text-base
-            capitalize font-normal font-roboto max-w-[11rem]`}
+            className={`${roboto.variable} text-textPrimary text-base lg:text-left
+            capitalize font-normal font-roboto max-w-[12rem] text-center`}
           >
             Promoting Authenticity, one scan at a time.
           </p>
           <div className="my-6">
             <p
-              className={`${roboto.variable} text-center text-textPrimary font-normal text-base `}
+              className={`${roboto.variable} text-center text-textPrimary font-normal text-base`}
             >
               Join our community
             </p>
@@ -42,9 +44,9 @@ const Footer = () => {
 const FooterIcons = () => (
   <div className="flex gap-4 mt-2">
     {[
-      { url: "/twitter", icon: <Twitter /> },
-      { url: "/telegram", icon: <Telegram /> },
-      { url: "/github", icon: <Github /> },
+      { url: "/twitter", icon: <TwitterIcon /> },
+      { url: "/telegram", icon: <TelegramIcon /> },
+      { url: "/github", icon: <GithubIcon /> },
     ].map(({ url, icon }) => (
       <div
         key={url}

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { StarknetProvider } from "@/components/starknet-provider";
 import "./globals.css";
+import { bowlby_one, poppins, roboto } from "./fonts";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,7 +18,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body
+        className={`${inter.className} ${poppins.variable}
+         ${bowlby_one.variable} ${roboto.variable} bg-secondary`}
+      >
         <StarknetProvider>{children}</StarknetProvider>
       </body>
     </html>

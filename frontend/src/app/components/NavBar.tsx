@@ -5,13 +5,20 @@ import Link from "next/link";
 const NavBar = (props: any) => {
   return (
     <nav
-      className={`${roboto.variable} flex items-center justify-between
-        px-20 xl:px-0 2xl:px-0 py-4 mb-12`}
+      className={`flex items-center justify-between px-4 lg:px-20
+        xl:px-0 2xl:px-0 py-4 mb-12 container mx-auto font-roboto`}
       {...props}
     >
       <div className="flex items-center gap-14">
         <Link href="/">
-          <BrandImage />
+          <div className="hidden md:block">
+            <BrandImage />
+          </div>
+          <div className="md:hidden">
+            <p className="text-textPrimary text-lg font-normal font-bowlby">
+              ScanGuard
+            </p>
+          </div>
         </Link>
         <ul
           className={`text-sm text-textPrimary leading-normal

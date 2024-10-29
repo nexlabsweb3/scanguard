@@ -1,5 +1,5 @@
-import { BarcodeScanner } from "@/assets/landing-page";
 import { roboto } from "../fonts";
+import { BarcodeIcon } from "@/assets/icons";
 
 const ScanButton = (props: any) => {
   return (
@@ -10,11 +10,11 @@ const ScanButton = (props: any) => {
       {...props}
     >
       <p
-        className={`${roboto.variable} text-textPrimary text-base font-medium `}
+        className={`${roboto.variable} text-textPrimary text-base font-medium font-roboto`}
       >
         SCAN PRODUCT
       </p>
-      <BarcodeScanner />
+      <BarcodeIcon />
     </button>
   );
 };

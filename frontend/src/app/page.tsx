@@ -29,16 +29,24 @@ export default function Home() {
   };
 
   return (
-    <main className="bg-secondary">
-      <div className="container mx-auto">
-        <header>
+    <main
+    // style={{
+    //   backgroundImage: "url(/landingbg.svg)",
+    //   backgroundRepeat: "no-repeat",
+    //   backgroundSize: "cover",
+    //   backgroundPosition: "center",
+    //   backgroundBlendMode: "color-dodge",
+    // }}
+    >
+      <div>
+        <header className="container mx-auto">
           <NavBar />
           <HeroSection />
         </header>
-        <main>
-          <ContentSection />
-        </main>
       </div>
+      <main className="container mx-auto">
+        <ContentSection />
+      </main>
       <Footer />
     </main>
   );
