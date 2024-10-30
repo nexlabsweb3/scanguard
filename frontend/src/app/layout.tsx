@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import { StarknetProvider } from "@/components/starknet-provider";
 import "./globals.css";
 import { bowlby_one, poppins, roboto } from "./fonts";
+import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +24,11 @@ export default function RootLayout({
         className={`${inter.className} ${poppins.variable}
          ${bowlby_one.variable} ${roboto.variable} bg-secondary`}
       >
-        <StarknetProvider>{children}</StarknetProvider>
+        <StarknetProvider>
+          <NavBar />
+          {children}
+          <Footer />
+        </StarknetProvider>
       </body>
     </html>
   );

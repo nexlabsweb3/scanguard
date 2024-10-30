@@ -1,4 +1,6 @@
 import {
+  ContentCTAArtDirection,
+  ContentEdgeArtDirection,
   EdgeUnderline,
   EdgeUnderLineMobile,
   ScanGuardEdge,
@@ -9,22 +11,20 @@ import {
 import { poppins, roboto } from "../fonts";
 import ScanButton from "./ScanButton";
 
-const ContentSection = () => {
-  return (
-    <section className="my-[7.5rem] md:my-[6.5rem]">
-      <ContentHeader />
-      <ContentCTA />
-      <ContentCTAMobile />
-      <GuideContent />
-    </section>
-  );
-};
+const ContentSection = () => (
+  <section className="my-[7.5rem] md:my-[6.5rem]">
+    <ContentHeader />
+    <ContentCTA />
+    <ContentCTAMobile />
+    <GuideContent />
+  </section>
+);
 
 const ContentHeader = () => (
   <div className="my-28 text-center px-4 md:px-0">
     <div className={`${poppins.variable} text-center text-textPrimary mb-6`}>
       <h2
-        className={`${poppins.variable} hidden md:block md:text-3xl lg:text-4xl
+        className={`${poppins.variable} hidden md:block md:text-2xl lg:text-4xl
           font-semibold font-poppins`}
       >
         Introducing ScanGuard, a trusted platform designed to{" "}
@@ -65,7 +65,7 @@ const ContentHeader = () => (
 
 const ContentCTA = () => (
   <div
-    className={`hidden md:grid place-items-center lg:py-16
+    className={`hidden lg:grid place-items-center lg:py-16
     shadow-2xl rounded-2xl lg:my-28 bg-[#232323]`}
   >
     <div className="grid grid-cols-2 lg:max-w-[50rem]">
@@ -92,7 +92,7 @@ const ContentCTA = () => (
 
 const ContentCTAMobile = () => (
   <div
-    className={`md:hidden flex flex-col justify-center place-items-center
+    className={`lg:hidden relative flex flex-col justify-center place-items-center
     text-textFaded ${roboto.variable} text-base text-center font-roboto`}
   >
     <div className="mb-6">
@@ -109,6 +109,9 @@ const ContentCTAMobile = () => (
     <VideoComponent />
     <AuthenticityParagraph />
     <ScanButton />
+    <div className="absolute bottom-4 right-1 md:hidden">
+      <ContentCTAArtDirection />
+    </div>
   </div>
 );
 
@@ -131,7 +134,12 @@ const AuthenticityParagraph = () => (
 );
 
 const GuideContent = () => (
-  <div className="flex flex-col lg:flex-row justify-center items-center gap-6 lg:gap-32 my-28 px-8">
+  <div
+    className={`relative flex flex-col lg:flex-row justify-center
+      items-center gap-6 lg:gap-32 my-28 px-8
+      shadow-2xl rounded-2xl bg-[#232323] py-12
+      lg:shadow-none lg:rounded-none lg:bg-inherit lg:py-0`}
+  >
     <div className="flex-1 flex flex-col gap-6">
       <GuideContentHeader />
       <GuideContentHeaderMobile />
@@ -144,6 +152,9 @@ const GuideContent = () => (
       </p>
     </div>
     <GuideContentImage />
+    <div className="absolute bottom-16 left-1 md:hidden">
+      <ContentEdgeArtDirection />
+    </div>
   </div>
 );
 
@@ -174,7 +185,7 @@ const GuideContentHeaderMobile = () => (
 );
 
 const GuideContentImage = () => (
-  <div className="flex-1 float-left relative w-full md:w-auto">
+  <div className="flex-1 float-left relative w-full ml-14 sm:ml-0 md:w-auto">
     <div>
       <div className="hidden lg:block">
         <ScanGuardEdge />

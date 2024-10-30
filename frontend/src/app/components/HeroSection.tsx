@@ -1,22 +1,16 @@
-import { Ellipse, PhoneImage, PhoneImageMobile } from "@/assets/landing-page";
+import { PhoneImage, PhoneImageMobile } from "@/assets/landing-page";
 import { poppins, roboto } from "../fonts";
 import ScanButton from "./ScanButton";
 
-const HeroSection = (props: any) => {
-  return (
-    <div className="relative px-6 md:px-0">
-      <div
-        className="flex flex-col justify-center items-center gap-6"
-        {...props}
-      >
-        <HeroCTA />
-        <HeroImage />
-        {/* <Ellipse className="text-textPrimary absolute ml-[1000px] z-10" /> */}
-      </div>
-      <SocialProof />
+const HeroSection = () => (
+  <div className="relative px-6 md:px-0">
+    <div className="flex flex-col justify-center items-center gap-6">
+      <HeroCTA />
+      <HeroImage />
     </div>
-  );
-};
+    <SocialProof />
+  </div>
+);
 
 const HeroCTA = (props: any) => (
   <div className="flex flex-col justify-center items-center gap-6 max-w-lg">
@@ -70,26 +64,24 @@ const SocialProof = () => (
   </div>
 );
 
-const SocialProofItem = (props: any) => {
-  return (
-    <div className="flex flex-col h-36 items-center justify-center p-6 relative">
-      <p
-        className={`${roboto.variable} text-xs md:text-base text-textPrimary
+const SocialProofItem = (props: any) => (
+  <div className="flex flex-col h-36 items-center justify-center p-6 relative">
+    <p
+      className={`${roboto.variable} text-xs md:text-base text-textPrimary
           font-normal font-roboto capitalize`}
-      >
-        {props.name}
-      </p>
-      <p
-        className={`${poppins.variable} text-[#FF6028] font-bold text-3xl
+    >
+      {props.name}
+    </p>
+    <p
+      className={`${poppins.variable} text-[#FF6028] font-bold text-3xl
           md:text-[2.5rem] uppercase font-poppins`}
-      >
-        100+
-      </p>
-      {props.display && (
-        <div className="w-1 h-12 opacity-10 bg-[#ff6029] rounded-sm absolute top-1/3 right-0" />
-      )}
-    </div>
-  );
-};
+    >
+      100+
+    </p>
+    {props.display && (
+      <div className="w-1 h-12 opacity-10 bg-[#ff6029] rounded-sm absolute top-1/3 right-0" />
+    )}
+  </div>
+);
 
 export default HeroSection;
