@@ -22,7 +22,7 @@ const ContentSection = () => (
 
 const ContentHeader = () => (
   <div className="my-28 text-center px-4 md:px-0">
-    <div className={`${poppins.variable} text-center text-textPrimary mb-6`}>
+    <div className={`${poppins.variable} text-center text-secondary dark:text-textPrimary mb-6`}>
       <h2
         className={`${poppins.variable} hidden md:block md:text-2xl lg:text-4xl
           font-semibold font-poppins`}
@@ -41,7 +41,7 @@ const ContentHeader = () => (
     </div>
     <div>
       <p
-        className={`${roboto.variable} hidden md:block text-textFaded text-base font-normal font-roboto`}
+        className={`${roboto.variable} hidden md:block text-secondary/70 dark:text-textFaded text-base font-normal font-roboto`}
       >
         SCANGUARD is a project aiming to protect consumers from counterfeit
         products by allowing easy authentication with a{' '}
@@ -74,14 +74,13 @@ const ContentCTA = () => (
         className={`flex flex-col items-center justify-center gap-6
         text-textFaded ${roboto.variable} text-base text-center font-roboto`}
       >
-        <div>
-          <h3
-            className={`${poppins.variable} text-textPrimary text-2xl text-center
-              font-semibold mb-1 font-poppins`}
-          >
-            HOW IT WORKS
-          </h3>
-          <p>Super easy steps to use scanguard</p>
+        <div className="grid gap-8">
+          <h2 className="text-3xl font-bold text-textPrimary-light dark:text-textPrimary">
+            How It Works
+          </h2>
+          <p className="text-textFaded-light dark:text-textFaded">
+            Simple steps to verify product authenticity
+          </p>
         </div>
         <AuthenticityParagraph />
         <ScanButton />
@@ -161,7 +160,7 @@ const GuideContent = () => (
 const GuideContentHeader = () => (
   <div className="hidden lg:block">
     <h4
-      className={`${poppins.variable} text-2xl lg:text-[2.5rem] text-textPrimary
+      className={`${poppins.variable} text-2xl lg:text-[2.5rem] text-textPrimary-light dark:text-textPrimary
       capitalize font-semibold`}
     >
       The edge ScanGuard offers
@@ -174,8 +173,8 @@ const GuideContentHeaderMobile = () => (
   <div className="grid place-items-center lg:hidden">
     <div>
       <h4
-        className={`${poppins.variable} text-2xl lg:text-[2.5rem] text-textPrimary
-      capitalize font-semibold text-center`}
+        className={`${poppins.variable} text-2xl lg:text-[2.5rem] text-textPrimary-light dark:text-textPrimary
+        capitalize font-semibold text-center`}
       >
         The edge <br /> ScanGuard offers
       </h4>

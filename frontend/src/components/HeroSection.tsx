@@ -15,7 +15,7 @@ const HeroSection = () => (
 const HeroCTA = (props: any) => (
   <div className="flex flex-col justify-center items-center gap-6 max-w-lg">
     <div
-      className={`${poppins.variable} text-textPrimary
+      className={`${poppins.variable} text-secondary dark:text-textPrimary
         text-center text-5xl font-medium font-poppins`}
     >
       <h1 className="hidden md:block">
@@ -26,7 +26,7 @@ const HeroCTA = (props: any) => (
       </h1>
     </div>
     <div
-      className={`${roboto.variable} text-textFaded text-center
+      className={`${roboto.variable} text-secondary/70 dark:text-textFaded text-center
       text-base font-normal leading-7 font-roboto`}
     >
       <p className="hidden md:block">

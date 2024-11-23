@@ -5,6 +5,7 @@ import { bowlby_one, poppins, roboto } from './fonts';
 import { StarknetProvider } from '@/components/StarknetProvider';
 import NavBar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { themeScript } from './theme-script';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,15 +20,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body
         className={`${inter.className} ${poppins.variable}
-         ${bowlby_one.variable} ${roboto.variable} bg-secondary`}
+         ${bowlby_one.variable} ${roboto.variable} 
+         bg-secondary-light dark:bg-secondary 
+         text-textPrimary-light dark:text-textPrimary
+         transition-colors duration-200`}
       >
         <StarknetProvider>
           <NavBar />
           {children}
-
           <Footer />
         </StarknetProvider>
       </body>
