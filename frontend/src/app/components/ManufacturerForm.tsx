@@ -10,7 +10,7 @@ import {
 
 export default function ManufacturerForm() {
   return (
-    <div className=" w-[34rem] space-y-8">
+    <div className=" w-[52rem] space-y-8">
       <div className="text-center">
         <h2 className="mt-6 text-3xl font-extrabold text-white">
           Create Manufacturer Account
