@@ -1,6 +1,7 @@
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
+  darkMode: 'class',
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -19,10 +20,22 @@ const config: Config = {
       },
       colors: {
         primary: '#F64F14',
-        secondary: '#1e1e1e',
-        textPrimary: '#f9f9f9',
-        textSecondary: '#F1F1F1',
-        textFaded: '#939393',
+        secondary: {
+          light: '#ffffff',
+          DEFAULT: '#1e1e1e',
+        },
+        textPrimary: {
+          light: '#1e1e1e',
+          DEFAULT: '#f9f9f9',
+        },
+        textSecondary: {
+          light: '#2e2e2e',
+          DEFAULT: '#F1F1F1',
+        },
+        textFaded: {
+          light: '#666666',
+          DEFAULT: '#939393',
+        },
       },
 
       fontFamily: {
