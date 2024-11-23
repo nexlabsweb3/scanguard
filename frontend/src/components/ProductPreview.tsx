@@ -1,8 +1,8 @@
 'use client';
-import { NoticeIcon, FlagIcon, CheckmarkIcon } from '../../assets/icons';
 import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import FlagProductModal from './FlagProductModal';
+import { CheckmarkIcon, FlagIcon, NoticeIcon } from '@/assets/icons';
 
 export default function ProductPreview() {
   const [isFlagging, setIsFlagging] = useState(false);

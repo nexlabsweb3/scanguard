@@ -1,4 +1,4 @@
-import { roboto } from '../fonts';
+import { roboto } from '@/app/fonts';
 import { BarcodeIcon } from '@/assets/icons';
 
 const ScanButton = (props: any) => {

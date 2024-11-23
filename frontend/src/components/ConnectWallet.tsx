@@ -1,4 +1,4 @@
-import { roboto } from '../fonts';
+import { roboto } from '@/app/fonts';
 
 const ConnectWallet = (props: any) => {
   return (

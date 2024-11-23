@@ -15,7 +15,7 @@ import AddressBar from '@/components/Addressbar';
 import ScanProduct from '@/components/Scan';
 import ConnectModal from '@/components/ConnectModal';
 import { useParams } from 'next/navigation';
-import ProductPreview from '../../components/ProductPreview';
+import ProductPreview from '@/components/ProductPreview';
 
 export default function ScanPage() {
   const { address } = useAccount();

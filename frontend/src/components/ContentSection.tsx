@@ -8,8 +8,8 @@ import {
   ScanList,
   ScanListMobile,
 } from '@/assets/landing-page';
-import { poppins, roboto } from '../fonts';
 import ScanButton from './ScanButton';
+import { poppins, roboto } from '@/app/fonts';
 
 const ContentSection = () => (
   <section className="my-[7.5rem] md:my-[6.5rem]">
