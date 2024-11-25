@@ -1,5 +1,5 @@
 import { PhoneImage, PhoneImageMobile } from '@/assets/landing-page';
-import { poppins, roboto } from '../fonts';
+import { poppins, roboto } from '../app/fonts';
 import ScanButton from './ScanButton';
 
 const HeroSection = () => (

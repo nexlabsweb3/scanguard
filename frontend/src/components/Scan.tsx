@@ -73,8 +73,6 @@ export default function ScanProduct() {
     }
   }, [payload]);
 
-  console.log(product);
-
   return (
     <>
       <div className="flex flex-col items-center justify-center">

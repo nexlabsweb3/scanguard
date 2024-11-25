@@ -6,7 +6,6 @@ import {
 } from '@starknet-react/core';
 import Image from 'next/image';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import GenericModal from './GenericModal';
 
 const AddressBar = ({
   setOpenConnectedModal,

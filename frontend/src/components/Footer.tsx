@@ -1,6 +1,6 @@
-import { poppins, roboto } from '../fonts';
 import Link from 'next/link';
 import { GithubIcon, TelegramIcon, TwitterIcon } from '@/assets/icons';
+import { poppins, roboto } from '@/app/fonts';
 
 const Footer = () => (
   <footer className="bg-[#303030] lg:bg-[#171717]">
