@@ -90,7 +90,7 @@ export const getProductDetails = async (req: Request, res: Response) => {
 
       const pinList = await searchResponse.json();
       
-      // Step 2: Find the file that matches our product ID
+      
       const targetPin = pinList.rows.find((pin: any) => 
           pin.metadata?.name === `${productId}.txt`
       );
