@@ -1,23 +1,56 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import FlagProductModal from './FlagProductModal';
 import { CheckmarkIcon, FlagIcon, NoticeIcon } from '@/assets/icons';
 
-export default function ProductPreview() {
+export default function ProductPreview({ productId }: { productId: string }) {
   const [isFlagging, setIsFlagging] = useState(false);
-  const product = {
-    name: 'Jaicatace Juice',
-    authenticityStatus: 'Not Authentic',
-    manufacturer: 'Jaicatace Beverages Ltd.',
-    dateOfScan: 'October 17, 2024',
-    batchNumber: 'JT2024-BX-0923',
-    timesScanned: 153,
-    trustScore: 90,
-    reportedIssues: 2,
-    image: 'product-overview.png',
-  };
+
+  interface Product {
+    product_id: string;
+    name: string;
+    image: string;
+    manufacturer: string;
+    manufactureDate: string;
+    expiryDate: string;
+  }
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [product, setProduct] = useState<Product | null>(null);
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      if (!productId) return;
+      
+      setLoading(true);
+      setError('');
+      
+      try {
+        const response = await fetch(`/api/scan/${productId}`);
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || 'Failed to fetch product details');
+        }
+
+        if (data.success && data.product) {
+          setProduct(data.product);
+        }
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Failed to fetch product details');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
+  }, [productId]);
+
+  const formattedManufactureDate = 'lorem';// new Date(product.manufactureDate).toLocaleDateString();
+  const formattedExpiryDate = 'lorem'; //new Date(product.expiryDate).toLocaleDateString();
 
   return (
     <div className="pt-[64px]">
@@ -40,8 +73,8 @@ export default function ProductPreview() {
         <div className="z-10">
           <div className=" h-[402px] flex items-center justify-center">
             <img
-              src="/product-overview.png"
-              alt="Jaicatace Juice"
+              src= "{product.image}"
+              alt="{product.name}"
               className="h-full"
             />
           </div>
