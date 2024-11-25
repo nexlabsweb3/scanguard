@@ -1,7 +1,7 @@
 import { BrandImage } from '@/assets/landing-page';
-import { roboto } from '../fonts';
 import Link from 'next/link';
 import ConnectWallet from './ConnectWallet';
+import { roboto } from '@/app/fonts';
 
 const NavBar = (props: any) => (
   <nav

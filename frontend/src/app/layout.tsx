@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { StarknetProvider } from './components/StarknetProvider';
 import './globals.css';
 import { bowlby_one, poppins, roboto } from './fonts';
-import Footer from './components/Footer';
-import NavBar from './components/Navbar';
+import { StarknetProvider } from '@/components/StarknetProvider';
+import NavBar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 const inter = Inter({ subsets: ['latin'] });
 
