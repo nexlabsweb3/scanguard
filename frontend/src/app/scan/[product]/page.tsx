@@ -1,6 +1,5 @@
 'use client';
 
-
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import { useAccount } from '@starknet-react/core';
@@ -86,7 +85,7 @@ export default function ScanPage() {
 			//TODO: center, add background, make it responsive and pixel perfect
 			//TODO: https://www.figma.com/design/dwXPww5jcUl55azC9EQ8H0/SCANGUARD?node-id=14-13&node-type=canvas&t=Q8gtO0EqfOBYEqke-0
 			*/}
-      <ProductPreview productId='product' />
+      <ProductPreview productId="product" />
       {open && <ScanProduct />}
 
       <ConnectModal isOpen={openConnectedModal} onClose={toggleUserModal} />

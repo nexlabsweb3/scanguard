@@ -15,12 +15,12 @@ export default function ProductPreview({ productId }: { productId: string }) {
     manufacturer: string;
     manufactureDate: string;
     expiryDate: string;
-    trustScore:any;
-    authenticityStatus:string;
-    reportedIssues:string;
-    timesScanned:string;
-    batchNumber:number;
-    dateOfScan:string;
+    trustScore: any;
+    authenticityStatus: string;
+    reportedIssues: string;
+    timesScanned: string;
+    batchNumber: number;
+    dateOfScan: string;
   }
 
   const [loading, setLoading] = useState(false);
@@ -30,10 +30,10 @@ export default function ProductPreview({ productId }: { productId: string }) {
   useEffect(() => {
     const fetchProduct = async () => {
       if (!productId) return;
-      
+
       setLoading(true);
       setError('');
-      
+
       try {
         const response = await fetch(`/api/scan/${productId}`);
         const data = await response.json();
@@ -41,12 +41,14 @@ export default function ProductPreview({ productId }: { productId: string }) {
         if (!response.ok) {
           throw new Error(data.error || 'Failed to fetch product details');
         }
-        console.log(data)
+        console.log(data);
         if (data.success && data.product) {
           setProduct(data.product);
         }
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to fetch product details');
+        setError(
+          err instanceof Error ? err.message : 'Failed to fetch product details'
+        );
       } finally {
         setLoading(false);
       }
@@ -54,8 +56,8 @@ export default function ProductPreview({ productId }: { productId: string }) {
 
     fetchProduct();
   }, [productId]);
-  console.log(product)
-  const formattedManufactureDate = 'lorem';// new Date(product.manufactureDate).toLocaleDateString();
+  console.log(product);
+  const formattedManufactureDate = 'lorem'; // new Date(product.manufactureDate).toLocaleDateString();
   const formattedExpiryDate = 'lorem'; //new Date(product.expiryDate).toLocaleDateString();
 
   return (
@@ -79,8 +81,8 @@ export default function ProductPreview({ productId }: { productId: string }) {
         <div className="z-10">
           <div className=" h-[402px] flex items-center justify-center">
             <img
-              src= {product?.image}
-              alt={product?.name ? product?.name:""}
+              src={product?.image}
+              alt={product?.name ? product?.name : ''}
               className="h-full"
             />
           </div>
