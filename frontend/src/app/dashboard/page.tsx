@@ -182,7 +182,7 @@ const Dashboard = () => {
 
   return (
     <div className="flex h-auto bg-[#FFFFFF]">
-        <aside className="hidden md:block w-[100px] bg-[#413FA0] text-white" style={{ minHeight: '1014px' }}>
+        <aside className="hidden md:block w-[100px] bg-[#1e1e1e] text-white" style={{ minHeight: '1014px' }}>
       <div className="flex items-center justify-center h-20 text-2xl font-bold">
         <IoMdMenu size={28} />
       </div>
@@ -204,7 +204,7 @@ const Dashboard = () => {
       </nav>
     </aside>
 
-      <aside className="bg-[#413FA0] text-white w-16 flex items-center justify-center md:hidden">
+      <aside className="bg-[#1e1e1e] text-white w-16 flex items-center justify-center md:hidden">
         <HiMenuAlt3 size={20} />
       </aside>
       
@@ -221,7 +221,7 @@ const Dashboard = () => {
         </header>
         <header className="flex flex-wrap items-center justify-between p-4 bg-gray-200 rounded-lg">
           <div className="flex gap-4 mb-2 md:mb-0">
-            <button className="bg-[#413FA0] text-white px-4 py-2 rounded-lg hover:bg-purple-700">
+            <button className="bg-[#1e1e1e] text-white px-4 py-2 rounded-lg hover:bg-[#1e1e1e]/80">
               Upcoming
             </button>
             <button className="bg-gray-100  text-black px-4 md:px-8 border border-gray-300 py-2 rounded-lg">
@@ -241,7 +241,7 @@ const Dashboard = () => {
           <div className="p-4">
           <button
             onClick={() => setModalOpen(true)}
-            className="bg-[#413FA0] text-white px-4 py-2 rounded-lg font-medium hover:bg-purple-700"
+            className="bg-[#1e1e1e] text-white px-4 py-2 rounded-lg font-medium hover:bg-[#1e1e1e]/80"
           >
             Add Event
           </button>
@@ -301,43 +301,23 @@ const Dashboard = () => {
           </table>
         </div>
 
-        {/* <div className="flex justify-center p-4">
-          <button className="px-4 py-2 mx-1 text-gray-600 hover:bg-[#413FA0] hover:text-white">
-            &laquo;
-          </button>
-          {[1, 2, 3, 4, 5].map((page) => (
-            <button
-              key={page}
-              className="px-4 py-2 mx-1 border border-gray-300 rounded-md text-gray-600 hover:bg-[#413FA0] hover:text-white"
-            >
-              {page}
-            </button>
-          ))}
-          <button className="px-4 py-2 mx-1 text-gray-600 hover:bg-[#413FA0] hover:text-white">
-            &raquo;
-          </button>
-        </div> */}
-
+  
 <div className="flex justify-center p-4">
-      {/* Previous Button */}
-      <button className="px-4 py-2 mx-1 text-gray-600 hover:bg-[#413FA0] hover:text-white">
+      <button className="px-4 py-2 mx-1 text-gray-600 hover:bg-[#1e1e1e] hover:text-white">
         &laquo;
       </button>
-
-      {/* Page Buttons */}
       {[1, 2, 3, 4, 5].map((page) => (
         <button
           key={page}
           onClick={() => handlePageClick(page)}
           className={`px-4 py-2 mx-1 border border-gray-300 rounded-md text-gray-600 
-            ${activePage === page ? "bg-[#413FA0] text-white" : "hover:bg-[#413FA0] hover:text-white"}`}
+            ${activePage === page ? "bg-[#1e1e1e] text-white" : "hover:bg-[#1e1e1e] hover:text-white"}`}
         >
           {page}
         </button>
       ))}
 
-      {/* Next Button */}
-      <button className="px-4 py-2 mx-1 text-gray-600 hover:bg-[#413FA0] hover:text-white">
+      <button className="px-4 py-2 mx-1 text-gray-600 hover:bg-[#1e1e1e] hover:text-white">
         &raquo;
       </button>
     </div>
