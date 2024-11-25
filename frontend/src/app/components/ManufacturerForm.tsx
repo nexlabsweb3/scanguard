@@ -5,7 +5,7 @@ import {
   EnvelopeIcon,
   PhoneIcon,
   MapIcon,
-  PhotoIcon
+  PhotoIcon,
 } from '@heroicons/react/24/outline';
 
 export default function ManufacturerForm() {
@@ -22,12 +22,18 @@ export default function ManufacturerForm() {
       <form className="mt-8 space-y-6 bg-white/10 backdrop-blur-md rounded-3xl p-8 shadow-xl border border-gray-700">
         <div className="space-y-6">
           <div>
-            <label htmlFor="company-name" className="block text-sm font-medium text-gray-200 mb-2">
+            <label
+              htmlFor="company-name"
+              className="block text-sm font-medium text-gray-200 mb-2"
+            >
               Company Name
             </label>
             <div className="relative rounded-md shadow-sm">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <BuildingOffice2Icon className="h-5 w-5 text-gray-300" aria-hidden="true" />
+                <BuildingOffice2Icon
+                  className="h-5 w-5 text-gray-300"
+                  aria-hidden="true"
+                />
               </div>
               <input
                 id="company-name"
@@ -41,12 +47,18 @@ export default function ManufacturerForm() {
           </div>
 
           <div>
-            <label htmlFor="manufacturer-name" className="block text-sm font-medium text-gray-200 mb-2">
+            <label
+              htmlFor="manufacturer-name"
+              className="block text-sm font-medium text-gray-200 mb-2"
+            >
               Manufacturer Name
             </label>
             <div className="relative rounded-md shadow-sm">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <UserIcon className="h-5 w-5 text-gray-300" aria-hidden="true" />
+                <UserIcon
+                  className="h-5 w-5 text-gray-300"
+                  aria-hidden="true"
+                />
               </div>
               <input
                 id="manufacturer-name"
@@ -60,7 +72,10 @@ export default function ManufacturerForm() {
           </div>
 
           <div>
-            <label htmlFor="address" className="block text-sm font-medium text-gray-200 mb-2">
+            <label
+              htmlFor="address"
+              className="block text-sm font-medium text-gray-200 mb-2"
+            >
               Address
             </label>
             <div className="relative rounded-md shadow-sm">
@@ -79,12 +94,18 @@ export default function ManufacturerForm() {
           </div>
 
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-200 mb-2">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-200 mb-2"
+            >
               Email
             </label>
             <div className="relative rounded-md shadow-sm">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <EnvelopeIcon className="h-5 w-5 text-gray-300" aria-hidden="true" />
+                <EnvelopeIcon
+                  className="h-5 w-5 text-gray-300"
+                  aria-hidden="true"
+                />
               </div>
               <input
                 id="email"
@@ -98,12 +119,18 @@ export default function ManufacturerForm() {
           </div>
 
           <div>
-            <label htmlFor="rc" className="block text-sm font-medium text-gray-200 mb-2">
+            <label
+              htmlFor="rc"
+              className="block text-sm font-medium text-gray-200 mb-2"
+            >
               Registration Code
             </label>
             <div className="relative rounded-md shadow-sm">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <IdentificationIcon className="h-5 w-5 text-gray-300" aria-hidden="true" />
+                <IdentificationIcon
+                  className="h-5 w-5 text-gray-300"
+                  aria-hidden="true"
+                />
               </div>
               <input
                 id="rc"
@@ -117,12 +144,18 @@ export default function ManufacturerForm() {
           </div>
 
           <div>
-            <label htmlFor="phone" className="block text-sm font-medium text-gray-200 mb-2">
+            <label
+              htmlFor="phone"
+              className="block text-sm font-medium text-gray-200 mb-2"
+            >
               Phone Number
             </label>
             <div className="relative rounded-md shadow-sm">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <PhoneIcon className="h-5 w-5 text-gray-300" aria-hidden="true" />
+                <PhoneIcon
+                  className="h-5 w-5 text-gray-300"
+                  aria-hidden="true"
+                />
               </div>
               <input
                 id="phone"
@@ -137,7 +170,10 @@ export default function ManufacturerForm() {
         </div>
 
         <div>
-          <label htmlFor="registration-image" className="block text-sm font-medium text-gray-200 mb-2">
+          <label
+            htmlFor="registration-image"
+            className="block text-sm font-medium text-gray-200 mb-2"
+          >
             Registration Image (Evidence)
           </label>
           <div className="relative rounded-md shadow-sm">
@@ -153,7 +189,9 @@ export default function ManufacturerForm() {
               className="block w-full pl-10 pr-3 py-2 border border-gray-600 rounded-xl bg-black/30 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition duration-150 ease-in-out sm:text-sm text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-orange-500 file:text-white hover:file:bg-orange-600"
             />
           </div>
-          <p className="mt-2 text-sm text-gray-400">Upload an image file as proof of registration.</p>
+          <p className="mt-2 text-sm text-gray-400">
+            Upload an image file as proof of registration.
+          </p>
         </div>
 
         <div>
@@ -162,7 +200,10 @@ export default function ManufacturerForm() {
             className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-orange-500 hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition duration-150 ease-in-out"
           >
             <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-              <BuildingOffice2Icon className="h-5 w-5 text-white" aria-hidden="true" />
+              <BuildingOffice2Icon
+                className="h-5 w-5 text-white"
+                aria-hidden="true"
+              />
             </span>
             Register
           </button>
