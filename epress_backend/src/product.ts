@@ -13,6 +13,9 @@ interface Product {
   expiryDate: string;
 }
 
+
+const PINATA_GATEWAY = process.env.PINATA_GATEWAY || "https://gateway.pinata.cloud/ipfs/";
+
 const PINATA_JWT: string = process.env.PINATA_JWT || "";
 
 const pinToIPFS = async (product: Product) => {
@@ -61,5 +64,72 @@ export const submitProduct = async (req: Request, res: Response) => {
     return res.json({ ipfs_hash: pin.IpfsHash });
   } catch (error) {
     return res.status(500).json({ error: "Error uploading to IPFS" });
+  }
+};
+
+
+export const getProductDetails = async (req: Request, res: Response) => {
+  const { productId } = req.params;
+  
+  if (!productId) {
+      return res.status(400).json({ error: "Product ID is required" });
+  }
+
+  try {
+      // Step 1: Get all pins from Pinata to find our product
+      const searchUrl = "https://api.pinata.cloud/data/pinList";
+      const searchResponse = await fetch(searchUrl, {
+          headers: {
+              Authorization: `Bearer ${PINATA_JWT}`
+          }
+      });
+      
+      if (!searchResponse.ok) {
+          throw new Error(`Failed to search pins: ${searchResponse.status}`);
+      }
+
+      const pinList = await searchResponse.json();
+      
+      // Step 2: Find the file that matches our product ID
+      const targetPin = pinList.rows.find((pin: any) => 
+          pin.metadata?.name === `${productId}.txt`
+      );
+
+      if (!targetPin) {
+          return res.status(404).json({ 
+              success: false,
+              error: "Product not found" 
+          });
+      }
+
+      // Step 3: Fetch the product data using the IPFS hash
+      const productUrl = `${PINATA_GATEWAY}${targetPin.ipfs_pin_hash}`;
+      const productResponse = await fetch(productUrl);
+      
+      if (!productResponse.ok) {
+          throw new Error(`Failed to fetch product: ${productResponse.status}`);
+      }
+
+      const productData: Product = await productResponse.json();
+      
+      // Step 4: Verify the product ID matches for security
+      if (productData.product_id !== productId) {
+          return res.status(404).json({ 
+              success: false,
+              error: "Product ID mismatch" 
+          });
+      }
+
+      return res.json({
+          success: true,
+          product: productData
+      });
+
+  } catch (error) {
+      console.error("Error fetching product:", error);
+      return res.status(500).json({ 
+          success: false,
+          error: "Failed to fetch product details" 
+      });
   }
 };
