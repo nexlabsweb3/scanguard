@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { AlertType } from '../hooks/useAlert';
 import { useAlert } from '../hooks/useAlert';
