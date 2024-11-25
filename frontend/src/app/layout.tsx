@@ -3,9 +3,9 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { StarknetProvider } from '@/components/StarknetProvider';
 import { bowlby_one, poppins, roboto } from './fonts';
-import Footer from './components/Footer';
-import NavBar from './components/Navbar';
-import Alert from './components/Alert';
+import Footer from '@/components/Footer';
+import NavBar from '@/components/Navbar';
+import Alert from '@/components/Alert';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,7 +19,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
   return (
     <html lang="en">
       <body
@@ -30,7 +29,7 @@ export default function RootLayout({
           <NavBar />
           {children}
 
-          <Alert  />
+          <Alert />
           <Footer />
         </StarknetProvider>
       </body>

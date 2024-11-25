@@ -1,6 +1,6 @@
 import React from 'react';
-import { AlertType } from '../../hooks/useAlert';
-import { useAlert } from '../../hooks/useAlert';
+import { AlertType } from '../hooks/useAlert';
+import { useAlert } from '../hooks/useAlert';
 
 const Alert: React.FC = () => {
   const { alert } = useAlert();
