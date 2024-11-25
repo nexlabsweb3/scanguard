@@ -6,3 +6,7 @@ export class AppService {
     return 'Hello World!';
   }
 }
+
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
