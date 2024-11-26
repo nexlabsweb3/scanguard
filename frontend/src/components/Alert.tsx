@@ -18,7 +18,7 @@ const Alert: React.FC = () => {
 
   return (
     <div
-      className={`fixed top-4 right-4 p-4 rounded border-l-4 shadow-md transition-opacity ${
+      className={`fixed top-4 right-4 p-4 rounded border-l-4 shadow-md transition-opacity z-[9999999] ${
         alertStyles[alert.type]
       }`}
       role="alert"

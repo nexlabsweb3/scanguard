@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, createContext, useContext, } from 'react';
 
 /**
  * Alert types supported by the useAlert hook
@@ -19,37 +19,14 @@ interface AlertState {
   isVisible: boolean;
 }
 
-/**
- * Custom hook for managing alert notifications in React applications.
- *
- * @returns {{
- *   alert: AlertState,
- *   showAlert: (type: AlertType, message: string) => void
- * }}
- *
- * @example
- * // Basic usage
- * function MyComponent() {
- *   const { alert, showAlert } = useAlert();
- *
- *   return (
- *     <>
- *       <Alert {...alert} />
- *       <button onClick={() => showAlert('success', 'It worked!', 10000)}>
- *         Show Success
- *       </button>
- *     </>
- *   );
- * }
- *
- * @example
- * // All alert types
- * showAlert('success', 'Operation completed successfully', 10000);
- * showAlert('error', 'An error occurred', 10000);
- * showAlert('warning', 'Please be careful', 10000);
- * showAlert('info', 'Just so you know...');
- */
-export const useAlert = () => {
+interface AlertContextType {
+  alert: AlertState;
+  showAlert: (type: AlertType, message: string, title?: string, duration?: number) => void;
+}
+
+const AlertContext = createContext<AlertContextType | undefined>(undefined);
+
+export function AlertProvider({ children }: { children: React.ReactNode }) {
   const [alert, setAlert] = useState<AlertState>({
     message: '',
     type: 'info',
@@ -57,12 +34,7 @@ export const useAlert = () => {
   });
 
   const showAlert = useCallback(
-    (
-      type: AlertType,
-      message: string,
-      title?: string,
-      duration: number = 5000
-    ) => {
+    (type: AlertType, message: string, title?: string, duration: number = 5000) => {
       setAlert({
         type,
         title,
@@ -70,7 +42,6 @@ export const useAlert = () => {
         isVisible: true,
       });
 
-      // Auto-hide after 5 seconds
       setTimeout(() => {
         setAlert((prev) => ({ ...prev, isVisible: false }));
       }, duration);
@@ -78,10 +49,46 @@ export const useAlert = () => {
     []
   );
 
-  return {
-    alert,
-    showAlert,
-  };
-};
+  return (
+    <AlertContext.Provider value={{ alert, showAlert }}>
+      {children}
+    </AlertContext.Provider>
+  );
+}
 
-export default useAlert;
+
+/**
+ * Custom hook for managing alert notifications in React applications.
+ *
+ * @returns {AlertContextType}
+*
+* @example
+* // Basic usage
+* function MyComponent() {
+*   const { alert, showAlert } = useAlert();
+*
+*   return (
+*     <>
+*       <Alert {...alert} />
+*       <button onClick={() => showAlert('success', 'It worked!', 10000)}>
+*         Show Success
+*       </button>
+*     </>
+*   );
+* }
+*
+* @example
+* // All alert types
+* showAlert('success', 'Operation completed successfully', 10000);
+* showAlert('error', 'An error occurred', 10000);
+* showAlert('warning', 'Please be careful', 10000);
+* showAlert('info', 'Just so you know...');
+*/
+export function useAlert() {
+  const context = useContext(AlertContext);
+  if (context === undefined) {
+    throw new Error('useAlert must be used within an AlertProvider');
+  }
+  return context;
+}
+

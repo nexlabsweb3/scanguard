@@ -6,6 +6,7 @@ import { bowlby_one, poppins, roboto } from './fonts';
 import Footer from '@/components/Footer';
 import NavBar from '@/components/Navbar';
 import Alert from '@/components/Alert';
+import { AlertProvider } from '@/hooks/useAlert';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -26,11 +27,13 @@ export default function RootLayout({
          ${bowlby_one.variable} ${roboto.variable} bg-secondary`}
       >
         <StarknetProvider>
-          <NavBar />
-          {children}
+          <AlertProvider>
+            <NavBar />
+            {children}
 
-          <Alert />
-          <Footer />
+            <Alert />
+            <Footer />
+          </AlertProvider>
         </StarknetProvider>
       </body>
     </html>
