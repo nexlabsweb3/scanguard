@@ -125,7 +125,7 @@ const ConnectModal = ({ isOpen, onClose }: Props) => {
               <Wallet
                 closeModal={closeModal}
                 key={connector.id || index}
-                src={connector.icon.light!}
+                src={connector.icon.toString()!}
                 name={connector.name}
                 connector={connector}
                 alt="alt"
