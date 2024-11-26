@@ -32,4 +32,15 @@ export class ManufacturerService {
       throw new InternalServerErrorException('Failed to register manufacturer');
     }
   }
+
+  async getAllManufacturers() {
+    try {
+      return await this.prisma.manufacturer.findMany();
+    } catch (error) {
+      throw new InternalServerErrorException(
+        'Failed to get manufacturers:',
+        error
+      );
+    }
+  }
 }

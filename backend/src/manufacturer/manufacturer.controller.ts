@@ -12,4 +12,8 @@ export class ManufacturerController {
   ) {
     return this.manufacturerService.registerManufacturer(createManufacturerDto);
   }
+  @Get()
+  async getAllManufacturers() {
+    return this.manufacturerService.getAllManufacturers();
+  }
 }
