@@ -19,7 +19,7 @@ const pinToIPFS = async (product: Product) => {
   const url = "https://api.pinata.cloud/pinning/pinFileToIPFS";
 
   const blob = new Blob([JSON.stringify(product, null, 2)], {
-    type: "application/json"
+    type: "application/json",
   });
 
   const file = new File([blob], `${product.product_id}.txt`);
@@ -29,9 +29,9 @@ const pinToIPFS = async (product: Product) => {
   const response = await fetch(url, {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${PINATA_JWT}`
+      Authorization: `Bearer ${PINATA_JWT}`,
     },
-    body: data
+    body: data,
   });
 
   return await response.json();
@@ -52,7 +52,7 @@ export const submitProduct = async (req: Request, res: Response) => {
     image,
     manufacturer,
     manufactureDate,
-    expiryDate
+    expiryDate,
   };
 
   try {

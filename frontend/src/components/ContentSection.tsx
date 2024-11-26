@@ -22,7 +22,9 @@ const ContentSection = () => (
 
 const ContentHeader = () => (
   <div className="my-28 text-center px-4 md:px-0">
-    <div className={`${poppins.variable} text-center text-secondary dark:text-textPrimary mb-6`}>
+    <div
+      className={`${poppins.variable} text-center text-secondary dark:text-textPrimary mb-6`}
+    >
       <h2
         className={`${poppins.variable} hidden md:block md:text-2xl lg:text-4xl
           font-semibold font-poppins`}

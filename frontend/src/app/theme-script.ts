@@ -4,4 +4,4 @@ export const themeScript = `
   } else {
     document.documentElement.classList.remove('dark')
   }
-`; 
+`;
