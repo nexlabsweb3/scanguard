@@ -16,7 +16,7 @@ export default function ManufacturerForm() {
           Create Manufacturer Account
         </h2>
         <p className="mt-2 text-[16px] text-gray-400">
-          Enter your Manufacturer details to get started
+          Enter your Manufacturer details to get started!
         </p>
       </div>
       <form className="mt-8 space-y-6 bg-white/10 backdrop-blur-md rounded-3xl p-8 shadow-xl border border-gray-700">
