@@ -69,7 +69,7 @@ scarb  build
 
 ## License
 
-This project is licensed under the MIT License. See [License](./LICENSE) for more information
+This project is licensed under the MIT License. See [License](https://opensource.org/license/mit) for more information
 
 ## Contributing
 For more info and guidance on contributing, join the contributors Telegram group: https://t.me/+p5JGJ4C8lCw5NjNk

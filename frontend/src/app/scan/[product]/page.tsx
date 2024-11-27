@@ -15,7 +15,7 @@ import AddressBar from '@/components/Addressbar';
 import ScanProduct from '@/components/Scan';
 import ConnectModal from '@/components/ConnectModal';
 import { useParams } from 'next/navigation';
-import ProductPreview from '../../components/ProductPreview';
+import ProductPreview from '@/components/ProductPreview';
 
 export default function ScanPage() {
   const { address } = useAccount();
@@ -85,7 +85,7 @@ export default function ScanPage() {
 			//TODO: center, add background, make it responsive and pixel perfect
 			//TODO: https://www.figma.com/design/dwXPww5jcUl55azC9EQ8H0/SCANGUARD?node-id=14-13&node-type=canvas&t=Q8gtO0EqfOBYEqke-0
 			*/}
-      <ProductPreview />
+      <ProductPreview productId="product" />
       {open && <ScanProduct />}
 
       <ConnectModal isOpen={openConnectedModal} onClose={toggleUserModal} />

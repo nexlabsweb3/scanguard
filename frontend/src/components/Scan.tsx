@@ -7,7 +7,7 @@ import {
 } from '@/assets/icons';
 import { CONTRACT_ADDR, formatDate, formatIpfsHash } from '@/lib/config';
 import { fetchIpfsFile } from '@/services/apiService';
-import { useAccount, useContractRead } from '@starknet-react/core';
+import { useAccount, useReadContract } from '@starknet-react/core';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Modal from '@/app/Modal';
@@ -38,7 +38,7 @@ export default function ScanProduct() {
     setOpenWallet((prev) => !prev);
   };
 
-  const { data } = useContractRead({
+  const { data } = useReadContract({
     functionName: 'verify',
     args: [payload.toString()],
     abi,
@@ -72,8 +72,6 @@ export default function ScanProduct() {
       setOpen(true);
     }
   }, [payload]);
-
-  console.log(product);
 
   return (
     <>
