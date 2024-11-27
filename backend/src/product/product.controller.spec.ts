@@ -1,10 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ProductController } from './product.controller';
 import { ProductService } from './product.service';
-import { PrismaService } from '../prisma/prisma.service';
 import { ProductDto } from './dto/product.dto';
-import { FlagProductDto } from './dto/flag-product.dto';
-import { HttpException, HttpStatus } from '@nestjs/common';
+import { HttpException } from '@nestjs/common';
 
 describe('ProductsController', () => {
   let controller: ProductController;
