@@ -35,7 +35,7 @@ const NavLinks = () => (
     className={`${roboto.variable} text-sm text-textPrimary leading-normal
       font-roboto uppercase hidden py-3 gap-6 items-center lg:flex`}
   >
-    {['home', 'anout', 'contact'].map((item, index, array) => (
+    {['home', 'contact', 'manufacturer'].map((item, index, array) => (
       <li
         key={item}
         className={`${index !== array.length - 1 ? 'border-r-2 border-primary/[.12] pr-6' : ''}
