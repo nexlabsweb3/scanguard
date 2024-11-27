@@ -1,4 +1,10 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { ProductDto } from './dto/product.dto';
 import { Product } from 'src/interfaces/Product';
 import { generateProductId } from 'src/common/utils/generateProductId';
@@ -8,6 +14,8 @@ export class ProductService {
   private readonly PINATA_JWT = process.env.PINATA_JWT || '';
   private readonly PINATA_GATEWAY =
     process.env.PINATA_GATEWAY || 'https://gateway.pinata.cloud/ipfs/';
+
+  constructor(private readonly prisma: PrismaService) {}
 
   async pinToIPFS(product: Product) {
     const url = 'https://api.pinata.cloud/pinning/pinFileToIPFS';
@@ -100,6 +108,17 @@ export class ProductService {
       throw new HttpException(
         'Failed to fetch product details',
         HttpStatus.INTERNAL_SERVER_ERROR
+      );
+    }
+  }
+
+  async getFlaggedProducts() {
+    try {
+      return await this.prisma.flaggedProduct.findMany();
+    } catch (error) {
+      throw new InternalServerErrorException(
+        'Failed to get flagged products:',
+        error
       );
     }
   }
