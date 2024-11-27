@@ -31,18 +31,23 @@ const NavBar = (props: any) => {
   );
 };
 
+const navItems = [
+  { name: 'Manufacturer', route: '/manufacturer/account' },
+  { name: 'Contact', route: '/contact' },
+];
+
 const NavLinks = () => (
   <ul
     className={`${roboto.variable} text-sm text-textPrimary leading-normal
       font-roboto uppercase hidden py-3 gap-6 items-center lg:flex`}
   >
-    {['home', 'contact', 'manufacturer'].map((item, index, array) => (
+    {navItems.map((item, index) => (
       <li
-        key={item}
-        className={`${index !== array.length - 1 ? 'border-r-2 border-primary/[.12] pr-6' : ''}
+        key={item.route}
+        className={`${index !== navItems.length - 1 ? 'border-r-2 border-primary/[.12] pr-6' : ''}
           `}
       >
-        <Link href={`${item === 'home' ? '/' : item}`}>{item}</Link>
+        <Link href={item.route}>{item.name}</Link>
       </li>
     ))}
   </ul>

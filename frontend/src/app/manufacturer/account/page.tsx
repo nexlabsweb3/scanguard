@@ -1,4 +1,4 @@
-import ManufacturerForm from '../components/ManufacturerForm';
+import ManufacturerForm from '@/components/manufacturer/ManufacturerForm';
 
 export default function ManufacturerPage() {
   return (
