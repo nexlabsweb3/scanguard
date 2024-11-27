@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { ProductDto } from './product.dto';
 import { Product } from 'src/interfaces/Product';
 import { generateProductId } from 'src/common/utils/generateProductId';
@@ -6,6 +6,8 @@ import { generateProductId } from 'src/common/utils/generateProductId';
 @Injectable()
 export class ProductsService {
   private readonly PINATA_JWT = process.env.PINATA_JWT || '';
+  private readonly PINATA_GATEWAY =
+    process.env.PINATA_GATEWAY || 'https://gateway.pinata.cloud/ipfs/';
 
   async pinToIPFS(product: Product) {
     const url = 'https://api.pinata.cloud/pinning/pinFileToIPFS';
@@ -25,8 +27,6 @@ export class ProductsService {
       },
       body: data,
     });
-
-    console.log('Response: ', await response);
 
     if (!response.ok) {
       const errorBody = await response.json();
@@ -49,6 +49,58 @@ export class ProductsService {
     } catch (error) {
       console.log(error);
       throw new Error('Error uploading to IPFS');
+    }
+  }
+
+  async getProductDetails(productId: string): Promise<Product> {
+    try {
+      // Step 1: Get all pins from Pinata to find our product
+      const searchUrl = 'https://api.pinata.cloud/data/pinList';
+      const searchResponse = await fetch(searchUrl, {
+        headers: {
+          Authorization: `Bearer ${this.PINATA_JWT}`,
+        },
+      });
+
+      if (!searchResponse.ok) {
+        throw new Error(`Failed to search pins: ${searchResponse.statusText}`);
+      }
+
+      const pinList = await searchResponse.json();
+
+      const targetPin = pinList.rows.find(
+        (pin: { metadata: { name: string } }) =>
+          pin.metadata?.name === `${productId}.txt`
+      );
+
+      if (!targetPin) {
+        throw new HttpException('Product not found', HttpStatus.NOT_FOUND);
+      }
+
+      // Step 3: Fetch the product data using the IPFS hash
+      const productUrl = `${this.PINATA_GATEWAY}${targetPin.ipfs_pin_hash}`;
+      const productResponse = await fetch(productUrl);
+
+      if (!productResponse.ok) {
+        throw new Error(
+          `Failed to fetch product: ${productResponse.statusText}`
+        );
+      }
+
+      const productData: Product = await productResponse.json();
+
+      // Step 4: Verify the product ID matches for security
+      if (productData.product_id !== productId) {
+        throw new HttpException('Product ID mismatch', HttpStatus.NOT_FOUND);
+      }
+
+      return productData;
+    } catch (error) {
+      console.error('Error fetching product:', error);
+      throw new HttpException(
+        'Failed to fetch product details',
+        HttpStatus.INTERNAL_SERVER_ERROR
+      );
     }
   }
 }
