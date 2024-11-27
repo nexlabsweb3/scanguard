@@ -8,6 +8,7 @@ import {
   Param,
 } from '@nestjs/common';
 import { ProductDto } from './dto/product.dto';
+import { FlagProductDto } from './dto/flag-product.dto';
 import { ProductService } from './product.service';
 
 @Controller('product')
@@ -47,5 +48,18 @@ export class ProductController {
   @Get()
   async getFlaggedProducts() {
     return this.productService.getFlaggedProducts();
+  }
+  
+  @Post('flag')
+  async flagProduct(@Body() flagProductDto: FlagProductDto) {
+    try {
+      return await this.productService.flagProduct(flagProductDto);
+    } catch (error) {
+      console.error('Error:', error.message);
+      throw new HttpException(
+        { error: error.message },
+        HttpStatus.INTERNAL_SERVER_ERROR
+      );
+    }
   }
 }
