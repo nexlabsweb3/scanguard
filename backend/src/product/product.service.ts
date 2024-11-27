@@ -4,10 +4,11 @@ import {
   Injectable,
   InternalServerErrorException,
 } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { ProductDto } from './dto/product.dto';
-import { Product } from 'src/interfaces/Product';
-import { generateProductId } from 'src/common/utils/generateProductId';
+import { FlagProductDto } from './dto/flag-product.dto';
+import { Product } from '../interfaces/Product';
+import { generateProductId } from '../common/utils/generateProductId';
 
 @Injectable()
 export class ProductService {
@@ -120,6 +121,21 @@ export class ProductService {
         'Failed to get flagged products:',
         error
       );
+    }
+  }
+
+  async flagProduct(flagProductDto: FlagProductDto) {
+    try {
+      return await this.prisma.flaggedProduct.create({
+        data: {
+          name: flagProductDto.name,
+          image: flagProductDto.image,
+          reason: flagProductDto.reason,
+        },
+      });
+    } catch (error) {
+      console.error('Error flagging product:', error);
+      throw new InternalServerErrorException('Failed to flag product');
     }
   }
 }
