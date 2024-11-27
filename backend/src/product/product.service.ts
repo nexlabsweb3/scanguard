@@ -1,10 +1,10 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { ProductDto } from './product.dto';
+import { ProductDto } from './dto/product.dto';
 import { Product } from 'src/interfaces/Product';
 import { generateProductId } from 'src/common/utils/generateProductId';
 
 @Injectable()
-export class ProductsService {
+export class ProductService {
   private readonly PINATA_JWT = process.env.PINATA_JWT || '';
   private readonly PINATA_GATEWAY =
     process.env.PINATA_GATEWAY || 'https://gateway.pinata.cloud/ipfs/';
@@ -39,7 +39,7 @@ export class ProductsService {
     return await response.json();
   }
 
-  async submitProduct(createProductDto: ProductDto): Promise<string> {
+  async uploadProduct(createProductDto: ProductDto): Promise<string> {
     const product_id = generateProductId(10);
     const productData = { product_id, ...createProductDto };
 
