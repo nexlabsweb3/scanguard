@@ -11,7 +11,7 @@ export default function Home() {
         <header className="container mx-auto">
           <HeroSection />
         </header>
-        <Dashboard/>
+        <Dashboard />
       </div>
       <main className="container mx-auto">
         <ContentSection />
