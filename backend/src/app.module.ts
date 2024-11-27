@@ -4,6 +4,8 @@ import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { ProductsModule } from './products/products.module';
 import { getEnvPath } from './common/utils/getEnvPath';
+import { ManufacturerModule } from './manufacturer/manufacturer.module';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
   imports: [
@@ -12,6 +14,8 @@ import { getEnvPath } from './common/utils/getEnvPath';
       isGlobal: true,
     }),
     ProductsModule,
+    ManufacturerModule,
+    PrismaModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,8 +1,10 @@
 'use client';
 
+
 import HeroSection from './components/HeroSection';
 import ContentSection from './components/ContentSection';
 import Dashboard from './dashboard/page';
+
 
 export default function Home() {
   return (
