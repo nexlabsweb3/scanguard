@@ -23,3 +23,10 @@ model manufacturer {
   isVerified Boolean  @default(false)
   createdAt  DateTime @default(now())
 }
+
+model flaggedProduct {
+  id     String @id @default(uuid())
+  name   String
+  image  String
+  reason String
+}
