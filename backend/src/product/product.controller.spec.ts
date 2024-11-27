@@ -1,18 +1,18 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ProductsController } from './products.controller';
-import { ProductsService } from './products.service';
-import { ProductDto } from './product.dto';
+import { ProductController } from './product.controller';
+import { ProductService } from './product.service';
+import { ProductDto } from './dto/product.dto';
 
 describe('ProductsController', () => {
-  let controller: ProductsController;
-  let service: ProductsService;
+  let controller: ProductController;
+  let service: ProductService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [ProductsController],
+      controllers: [ProductController],
       providers: [
         {
-          provide: ProductsService,
+          provide: ProductService,
           useValue: {
             submitProduct: jest.fn(),
           },
@@ -20,8 +20,8 @@ describe('ProductsController', () => {
       ],
     }).compile();
 
-    controller = module.get<ProductsController>(ProductsController);
-    service = module.get<ProductsService>(ProductsService);
+    controller = module.get<ProductController>(ProductController);
+    service = module.get<ProductService>(ProductService);
   });
 
   it('should be defined', () => {
@@ -39,10 +39,10 @@ describe('ProductsController', () => {
       };
 
       jest
-        .spyOn(service, 'submitProduct')
+        .spyOn(service, 'uploadProduct')
         .mockResolvedValue('QmUiPq1dRygSjwCBAqxvwaJxbGVFyHmPmSrL4YiytJFfkh');
 
-      const result = await controller.submitProduct(dto);
+      const result = await controller.uploadProduct(dto);
       expect(result).toEqual({
         ipfs_hash: 'QmUiPq1dRygSjwCBAqxvwaJxbGVFyHmPmSrL4YiytJFfkh',
       });
@@ -58,10 +58,10 @@ describe('ProductsController', () => {
       };
 
       jest
-        .spyOn(service, 'submitProduct')
+        .spyOn(service, 'uploadProduct')
         .mockRejectedValue(new Error('Error uploading to IPFS'));
 
-      await expect(controller.submitProduct(dto)).rejects.toThrow();
+      await expect(controller.uploadProduct(dto)).rejects.toThrow();
     });
   });
 });

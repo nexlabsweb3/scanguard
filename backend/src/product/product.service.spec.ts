@@ -1,16 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { ProductsService } from './products.service';
-import { ProductDto } from './product.dto';
+import { ProductService } from './product.service';
+import { ProductDto } from './dto/product.dto';
 
 describe('ProductsService', () => {
-  let service: ProductsService;
+  let service: ProductService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [ProductsService],
+      providers: [ProductService],
     }).compile();
 
-    service = module.get<ProductsService>(ProductsService);
+    service = module.get<ProductService>(ProductService);
   });
 
   it('should be defined', () => {
@@ -31,7 +31,7 @@ describe('ProductsService', () => {
         IpfsHash: 'QmUiPq1dRygSjwCBAqxvwaJxbGVFyHmPmSrL4YiytJFfkh',
       });
 
-      const result = await service.submitProduct(dto);
+      const result = await service.uploadProduct(dto);
       expect(result).toEqual('QmUiPq1dRygSjwCBAqxvwaJxbGVFyHmPmSrL4YiytJFfkh');
     });
 
@@ -48,7 +48,7 @@ describe('ProductsService', () => {
         .spyOn(service, 'pinToIPFS')
         .mockRejectedValue(new Error('Error uploading to IPFS'));
 
-      await expect(service.submitProduct(dto)).rejects.toThrow(
+      await expect(service.uploadProduct(dto)).rejects.toThrow(
         'Error uploading to IPFS'
       );
     });

@@ -7,18 +7,17 @@ import {
   Get,
   Param,
 } from '@nestjs/common';
-import { ProductDto } from './product.dto';
-import { ProductsService } from './products.service';
+import { ProductDto } from './dto/product.dto';
+import { ProductService } from './product.service';
 
-@Controller('products')
-export class ProductsController {
-  constructor(private readonly productService: ProductsService) {}
+@Controller('product')
+export class ProductController {
+  constructor(private readonly productService: ProductService) {}
 
-  @Post('submit')
-  async submitProduct(@Body() productDto: ProductDto) {
-    console.log('Received DTO:', productDto);
+  @Post('upload')
+  async uploadProduct(@Body() productDto: ProductDto) {
     try {
-      const ipfsHash = await this.productService.submitProduct(productDto);
+      const ipfsHash = await this.productService.uploadProduct(productDto);
       console.log('Service Result:', ipfsHash);
       return { ipfs_hash: ipfsHash };
     } catch (error) {
