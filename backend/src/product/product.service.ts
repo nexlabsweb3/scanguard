@@ -8,7 +8,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import { ProductDto } from './dto/product.dto';
 import { FlagProductDto } from './dto/flag-product.dto';
 import { Product } from '../interfaces/Product';
-import { generateProductId } from 'src/common/utils/generateProductId';
+import { generateProductId } from '../common/utils/generateProductId';
 
 @Injectable()
 export class ProductService {
