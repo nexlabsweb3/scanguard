@@ -1,11 +1,16 @@
+'use client';
+
 import { BrandImage } from '@/assets/landing-page';
 import Link from 'next/link';
 import ConnectWallet from './ConnectWallet';
 import { roboto } from '@/app/fonts';
+import { useAlert } from '@/hooks/useAlert';
 
-const NavBar = (props: any) => (
-  <nav
-    className={`flex items-center justify-between px-4 lg:px-20
+const NavBar = (props: any) => {
+  const { showAlert } = useAlert();
+  return (
+    <nav
+      className={`flex items-center justify-between px-4 lg:px-20
         xl:px-0 2xl:px-0 py-4 mb-12 container mx-auto font-roboto
         bg-[#1e1e1e]/80 backdrop-blur-sm sticky top-0 z-10
         lg:static lg:bg-none`}
@@ -17,7 +22,9 @@ const NavBar = (props: any) => (
           <BrandImage />
         </div>
         <div className="md:hidden">
-          <p className="text-textPrimary text-lg font-normal font-bowlby">
+          <p
+            onClick={() => showAlert('success', 'You clicked the scanGuard logo', 'ScanGaurd Alert')}
+            className="text-textPrimary text-lg font-normal font-bowlby">
             ScanGuard
           </p>
         </div>
@@ -28,7 +35,8 @@ const NavBar = (props: any) => (
       <ConnectWallet />
     </div>
   </nav>
-);
+  );
+};
 
 const NavLinks = () => (
   <ul
