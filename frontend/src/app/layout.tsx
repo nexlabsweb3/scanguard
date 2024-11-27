@@ -1,10 +1,12 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import { bowlby_one, poppins, roboto } from './fonts';
 import { StarknetProvider } from '@/components/StarknetProvider';
-import NavBar from '@/components/Navbar';
+import { bowlby_one, poppins, roboto } from './fonts';
 import Footer from '@/components/Footer';
+import NavBar from '@/components/Navbar';
+import Alert from '@/components/Alert';
+import { AlertProvider } from '@/hooks/useAlert';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -25,10 +27,13 @@ export default function RootLayout({
          ${bowlby_one.variable} ${roboto.variable} bg-secondary`}
       >
         <StarknetProvider>
-          <NavBar />
-          {children}
+          <AlertProvider>
+            <NavBar />
+            {children}
 
-          <Footer />
+            <Alert />
+            <Footer />
+          </AlertProvider>
         </StarknetProvider>
       </body>
     </html>

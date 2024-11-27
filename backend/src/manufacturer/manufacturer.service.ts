@@ -2,6 +2,7 @@ import {
   Injectable,
   ConflictException,
   InternalServerErrorException,
+  NotFoundException,
 } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateManufacturerDto } from './dto/create-manufacturer.dto';
@@ -31,5 +32,28 @@ export class ManufacturerService {
       }
       throw new InternalServerErrorException('Failed to register manufacturer');
     }
+  }
+
+  async getAllManufacturers() {
+    try {
+      return await this.prisma.manufacturer.findMany();
+    } catch (error) {
+      throw new InternalServerErrorException(
+        'Failed to get manufacturers:',
+        error
+      );
+    }
+  }
+
+  async getManufacturerById(id: string) {
+    const manufacturer = await this.prisma.manufacturer.findUnique({
+      where: { id },
+    });
+
+    if (!manufacturer) {
+      throw new NotFoundException(`Manufacturer with ID ${id} not found`);
+    }
+
+    return manufacturer;
   }
 }
