@@ -49,7 +49,7 @@ export class ProductController {
   async getFlaggedProducts() {
     return this.productService.getFlaggedProducts();
   }
-  
+
   @Post('flag')
   async flagProduct(@Body() flagProductDto: FlagProductDto) {
     try {

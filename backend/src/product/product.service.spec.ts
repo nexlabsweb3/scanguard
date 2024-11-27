@@ -77,14 +77,16 @@ describe('ProductsService', () => {
     };
 
     it('should successfully flag a product', async () => {
-      const mockCreatedProduct = { 
+      const mockCreatedProduct = {
         id: '1',
-        ...mockFlagProductDto 
+        ...mockFlagProductDto,
       };
-      jest.spyOn(prismaService.flaggedProduct, 'create').mockResolvedValue(mockCreatedProduct);
+      jest
+        .spyOn(prismaService.flaggedProduct, 'create')
+        .mockResolvedValue(mockCreatedProduct);
 
       const result = await service.flagProduct(mockFlagProductDto);
-      
+
       expect(result).toEqual(mockCreatedProduct);
       expect(prismaService.flaggedProduct.create).toHaveBeenCalledWith({
         data: mockFlagProductDto,
@@ -92,10 +94,12 @@ describe('ProductsService', () => {
     });
 
     it('should throw InternalServerErrorException when flagging fails', async () => {
-      jest.spyOn(prismaService.flaggedProduct, 'create').mockRejectedValue(new Error('Database error'));
+      jest
+        .spyOn(prismaService.flaggedProduct, 'create')
+        .mockRejectedValue(new Error('Database error'));
 
       await expect(service.flagProduct(mockFlagProductDto)).rejects.toThrow(
-        InternalServerErrorException,
+        InternalServerErrorException
       );
     });
   });
@@ -107,19 +111,23 @@ describe('ProductsService', () => {
         { id: '2', name: 'Product 2', image: 'image2.jpg', reason: 'Expired' },
       ];
 
-      jest.spyOn(prismaService.flaggedProduct, 'findMany').mockResolvedValue(mockFlaggedProducts);
+      jest
+        .spyOn(prismaService.flaggedProduct, 'findMany')
+        .mockResolvedValue(mockFlaggedProducts);
 
       const result = await service.getFlaggedProducts();
-      
+
       expect(result).toEqual(mockFlaggedProducts);
       expect(prismaService.flaggedProduct.findMany).toHaveBeenCalled();
     });
 
     it('should throw InternalServerErrorException when fetch fails', async () => {
-      jest.spyOn(prismaService.flaggedProduct, 'findMany').mockRejectedValue(new Error('Database error'));
+      jest
+        .spyOn(prismaService.flaggedProduct, 'findMany')
+        .mockRejectedValue(new Error('Database error'));
 
       await expect(service.getFlaggedProducts()).rejects.toThrow(
-        InternalServerErrorException,
+        InternalServerErrorException
       );
     });
   });

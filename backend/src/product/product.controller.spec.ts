@@ -76,23 +76,25 @@ describe('ProductsController', () => {
     };
 
     it('should successfully flag a product', async () => {
-      const mockResponse = { 
+      const mockResponse = {
         id: '1',
-        ...mockFlagProductDto 
+        ...mockFlagProductDto,
       };
       jest.spyOn(service, 'flagProduct').mockResolvedValue(mockResponse);
 
       const result = await controller.flagProduct(mockFlagProductDto);
-      
+
       expect(result).toEqual(mockResponse);
       expect(service.flagProduct).toHaveBeenCalledWith(mockFlagProductDto);
     });
 
     it('should throw HttpException when flagging fails', async () => {
-      jest.spyOn(service, 'flagProduct').mockRejectedValue(new Error('Failed to flag'));
+      jest
+        .spyOn(service, 'flagProduct')
+        .mockRejectedValue(new Error('Failed to flag'));
 
       await expect(controller.flagProduct(mockFlagProductDto)).rejects.toThrow(
-        HttpException,
+        HttpException
       );
     });
   });
@@ -104,10 +106,12 @@ describe('ProductsController', () => {
         { id: '2', name: 'Product 2', image: 'image2.jpg', reason: 'Expired' },
       ];
 
-      jest.spyOn(service, 'getFlaggedProducts').mockResolvedValue(mockFlaggedProducts);
+      jest
+        .spyOn(service, 'getFlaggedProducts')
+        .mockResolvedValue(mockFlaggedProducts);
 
       const result = await controller.getFlaggedProducts();
-      
+
       expect(result).toEqual(mockFlaggedProducts);
       expect(service.getFlaggedProducts).toHaveBeenCalled();
     });
