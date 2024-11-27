@@ -1,9 +1,40 @@
 import { FlagIcon } from '@/assets/icons';
 import React, { useState } from 'react';
 
-export default function FlagProductModal({ setOpen }: { setOpen: () => void }) {
-  const [selectedOption, setSelectedOption] = useState('');
-  const [customOption, setCustomOption] = useState('');
+export default function FlagProductModal({
+  setOpen,
+  product_id,
+}: {
+  setOpen: () => void;
+  product_id: string;
+}) {
+  const [selectedOption, setSelectedOption] = useState<string>('');
+  const [customOption, setCustomOption] = useState<string>('');
+
+  const URL = '';
+
+  const handleFlagProduct = async function () {
+    const response = await fetch(URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        product_id,
+        flag_reason: selectedOption || customOption,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorBody = await response.json();
+      console.error('Error Response:', errorBody);
+      throw new Error(
+        `Failed to flag product: ${errorBody.message || response.statusText}`
+      );
+    }
+
+    return await response.json();
+  };
 
   const flagOptions = [
     {
@@ -74,7 +105,10 @@ export default function FlagProductModal({ setOpen }: { setOpen: () => void }) {
           >
             Go back
           </button>
-          <button className="py-3 lg:py-[15px] bg-[#343131] rounded-lg lg:rounded-2xl">
+          <button
+            className="py-3 lg:py-[15px] bg-[#343131] rounded-lg lg:rounded-2xl"
+            onSubmit={handleFlagProduct}
+          >
             Submit
           </button>
         </div>
