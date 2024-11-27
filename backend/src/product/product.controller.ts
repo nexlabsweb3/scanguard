@@ -43,4 +43,9 @@ export class ProductController {
       );
     }
   }
+
+  @Get()
+  async getFlaggedProducts() {
+    return this.productService.getFlaggedProducts();
+  }
 }
