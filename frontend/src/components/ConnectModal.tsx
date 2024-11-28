@@ -84,7 +84,7 @@ const ConnectModal = ({ isOpen, onClose }: Props) => {
       <div className="flex p-4 w-full lg:p-0 ">
         <div className="basis-5/6 lg:col-span-2  l lg:py-4 lg:pl-8">
           <h2 className="text-center my-4 lg:text-start font-bold text-white text-[1.125em]">
-            Connect  Wallet
+            Connect Wallet
           </h2>
         </div>
         <div className="ml-auto lg:col-span-3 lg:py-4 lg:pr-8">
@@ -122,7 +122,6 @@ const ConnectModal = ({ isOpen, onClose }: Props) => {
             ))}
           </div>
         </div>
-
       </div>
     </GenericModal>
   );
