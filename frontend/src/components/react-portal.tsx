@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useLayoutEffect, useState } from "react";
-import { createPortal } from "react-dom";
+import { useLayoutEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 interface ReactPortalProps {
   children: React.ReactElement;
@@ -10,8 +10,8 @@ interface ReactPortalProps {
 
 const createContainerAndAppendToBody = (containerId: string) => {
   if (!document) return null;
-  const wrapperElement = document.createElement("div");
-  wrapperElement.setAttribute("id", containerId);
+  const wrapperElement = document.createElement('div');
+  wrapperElement.setAttribute('id', containerId);
   document.body.appendChild(wrapperElement);
   return wrapperElement;
 };

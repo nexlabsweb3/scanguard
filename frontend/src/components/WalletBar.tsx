@@ -1,5 +1,6 @@
 'use client';
-import { useAccount, useConnect, useDisconnect } from '@starknet-react/core';
+import { UserCircleIcon } from '@heroicons/react/24/outline';
+import { useAccount, useDisconnect } from '@starknet-react/core';
 import { useMemo } from 'react';
 
 function WalletConnected() {
@@ -12,16 +13,19 @@ function WalletConnected() {
   }, [address]);
 
   return (
-    <div>
-      <span>Connected: {shortenedAddress}</span>
-      <button onClick={() => disconnect()}>Disconnect</button>
+    <div
+      onClick={() => disconnect()}
+      className="bg-primary cursor-pointer flex items-center gap-x-2 rounded-full px-5 py-3"
+    >
+      <div>
+        <UserCircleIcon className="text-white w-6 h-6" />
+      </div>
+      <span className="text-white">{shortenedAddress}</span>
     </div>
   );
 }
 
 function ConnectWallet() {
-  const { connectors, connect } = useConnect();
-
   return (
     <div>
       <span>Choose a wallet: </span>
