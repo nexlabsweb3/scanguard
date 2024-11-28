@@ -68,6 +68,7 @@ export default function ProductPreview({ productId }: { productId: string }) {
             setOpen={() => {
               setIsFlagging(false);
             }}
+            product_id={productId}
           />,
           document.body
         )}
