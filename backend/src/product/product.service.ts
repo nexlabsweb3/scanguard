@@ -1,13 +1,22 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { ProductDto } from './product.dto';
-import { Product } from 'src/interfaces/Product';
-import { generateProductId } from 'src/common/utils/generateProductId';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
+import { PrismaService } from '../prisma/prisma.service';
+import { ProductDto } from './dto/product.dto';
+import { FlagProductDto } from './dto/flag-product.dto';
+import { Product } from '../interfaces/Product';
+import { generateProductId } from '../common/utils/generateProductId';
 
 @Injectable()
-export class ProductsService {
+export class ProductService {
   private readonly PINATA_JWT = process.env.PINATA_JWT || '';
   private readonly PINATA_GATEWAY =
     process.env.PINATA_GATEWAY || 'https://gateway.pinata.cloud/ipfs/';
+
+  constructor(private readonly prisma: PrismaService) {}
 
   async pinToIPFS(product: Product) {
     const url = 'https://api.pinata.cloud/pinning/pinFileToIPFS';
@@ -39,7 +48,7 @@ export class ProductsService {
     return await response.json();
   }
 
-  async submitProduct(createProductDto: ProductDto): Promise<string> {
+  async uploadProduct(createProductDto: ProductDto): Promise<string> {
     const product_id = generateProductId(10);
     const productData = { product_id, ...createProductDto };
 
@@ -101,6 +110,32 @@ export class ProductsService {
         'Failed to fetch product details',
         HttpStatus.INTERNAL_SERVER_ERROR
       );
+    }
+  }
+
+  async getFlaggedProducts() {
+    try {
+      return await this.prisma.flaggedProduct.findMany();
+    } catch (error) {
+      throw new InternalServerErrorException(
+        'Failed to get flagged products:',
+        error
+      );
+    }
+  }
+
+  async flagProduct(flagProductDto: FlagProductDto) {
+    try {
+      return await this.prisma.flaggedProduct.create({
+        data: {
+          name: flagProductDto.name,
+          image: flagProductDto.image,
+          reason: flagProductDto.reason,
+        },
+      });
+    } catch (error) {
+      console.error('Error flagging product:', error);
+      throw new InternalServerErrorException('Failed to flag product');
     }
   }
 }

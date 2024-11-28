@@ -1,9 +1,16 @@
 import { FlagIcon } from '@/assets/icons';
+import { handleFlagProduct } from '@/services/apiService';
 import React, { useState } from 'react';
 
-export default function FlagProductModal({ setOpen }: { setOpen: () => void }) {
-  const [selectedOption, setSelectedOption] = useState('');
-  const [customOption, setCustomOption] = useState('');
+export default function FlagProductModal({
+  setOpen,
+  product_id,
+}: {
+  setOpen: () => void;
+  product_id: string;
+}) {
+  const [selectedOption, setSelectedOption] = useState<string>('');
+  const [customOption, setCustomOption] = useState<string>('');
 
   const flagOptions = [
     {
@@ -74,7 +81,12 @@ export default function FlagProductModal({ setOpen }: { setOpen: () => void }) {
           >
             Go back
           </button>
-          <button className="py-3 lg:py-[15px] bg-[#343131] rounded-lg lg:rounded-2xl">
+          <button
+            className="py-3 lg:py-[15px] bg-[#343131] rounded-lg lg:rounded-2xl"
+            onSubmit={() =>
+              handleFlagProduct(product_id, selectedOption || customOption)
+            }
+          >
             Submit
           </button>
         </div>
