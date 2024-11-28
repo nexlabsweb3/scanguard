@@ -197,7 +197,12 @@ export default function ScanProduct() {
                 </p>
 
                 <div className="">
-                  <img src={product?.image} alt="product-image" />
+                <Image
+ src={product?.image || '/placeholder-product.png'}
+ alt="product-image"
+ width={300}   // Add appropriate width
+ height={300}  // Add appropriate height
+/>
                   <div className="flex items-center justify-between pt-5">
                     {/* <div className="space-y-2 flex items-center justify-center flex-col">
 											<ScanIcon2 />
