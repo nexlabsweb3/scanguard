@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { createPortal } from 'react-dom';
 import FlagProductModal from './FlagProductModal';
 import { CheckmarkIcon, FlagIcon, NoticeIcon } from '@/assets/icons';
@@ -73,18 +74,23 @@ export default function ProductPreview({ productId }: { productId: string }) {
           document.body
         )}
       <div className="w-full max-w-6xl relative lg:bg-[#1E1E1E] rounded-3xl p-6 lg:p-[88px] text-white mx-auto lg:border-[1px] border-[#303030] grid grid-cols-1 lg:grid-cols-2 gap-y-5 gap-x-[80px] items-stretch">
-        <img
+      <Image
           src="/productEllipse.svg"
           alt=""
           className="absolute hidden lg:flex top-[-30px] left-[60px] z-[1]"
+          width={100}  
+          height={100} 
         />
         {/* Product Image Section */}
         <div className="z-10">
           <div className=" h-[402px] flex items-center justify-center">
-            <img
-              src={product?.image}
-              alt={product?.name ? product?.name : ''}
+          <Image
+              src={product?.image || '/placeholder.png'} // Add a fallback image
+              alt={product?.name ? product?.name : 'Product Image'}
               className="h-full"
+              width={300}  
+              height={402} 
+              objectFit="contain" 
             />
           </div>
 

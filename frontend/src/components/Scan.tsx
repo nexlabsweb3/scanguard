@@ -93,11 +93,13 @@ export default function ScanProduct() {
                   </p>
                 </div>
                 <div className="col-span-2 w-full h-full">
-                  <img
-                    src={product?.image}
-                    className="w-full h-full object-cover"
-                    alt="product-image"
-                  />
+                <Image
+    src={product?.image || '/placeholder-product.png'} // Add fallback image
+    className="w-full h-full object-cover"
+    alt="product-image"
+    width={500}  
+    height={500} 
+  />
                   {/* <div className="flex items-center justify-between pt-5">
 										<div className="space-y-2 flex items-center justify-center flex-col">
 											<ScanIcon2 />

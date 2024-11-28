@@ -55,3 +55,4 @@ const NavLinks = () => (
   </ul>
 );
 export default NavBar;
+}

@@ -1,10 +1,12 @@
 'use client';
+import Image from 'next/image';
 import {
   DiscordIcon,
   ScanIcon,
   TelegramIcon,
   TwitterIcon,
 } from '../../assets/icons';
+
 import Link from 'next/link';
 
 export default function Home() {
@@ -98,10 +100,12 @@ export default function Home() {
         </div>
 
         <div className="w-full h-full">
-          <img
+          <Image
             className="w-full h-full object-cover"
             src="/bottle.png"
             alt="bottles"
+            width={500}  
+            height={500} 
           />
         </div>
       </div>
