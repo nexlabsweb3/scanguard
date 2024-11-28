@@ -287,6 +287,23 @@ export const BarcodeIcon = (props: any) => (
   </svg>
 );
 
+export const UserIcon = (props: any) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    width="24"
+    height="24"
+  >
+    <circle cx="12" cy="8" r="4"></circle>
+    <path d="M16 16c0-2-4-3-4-3s-4 1-4 3v4h8v-4z"></path>
+  </svg>
+);
+
 export const NoticeIcon = (props: any) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"

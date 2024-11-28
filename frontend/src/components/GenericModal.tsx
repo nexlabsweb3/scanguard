@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect } from "react";
-import ReactPortal from "./react-portal";
+import { useEffect } from 'react';
+import ReactPortal from './react-portal';
 
 const GenericModal = ({
   isOpen,
@@ -18,20 +18,19 @@ const GenericModal = ({
   className?: string;
   position?: string;
 }) => {
-
   useEffect(() => {
     const closeOnEscapeKey = (e: KeyboardEvent) =>
-      e.key === "Escape" ? onClose() : null;
-    document.body.addEventListener("keydown", closeOnEscapeKey);
+      e.key === 'Escape' ? onClose() : null;
+    document.body.addEventListener('keydown', closeOnEscapeKey);
     return (): void => {
-      document.body.removeEventListener("keydown", closeOnEscapeKey);
+      document.body.removeEventListener('keydown', closeOnEscapeKey);
     };
   }, [onClose]);
 
   useEffect(() => {
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow = 'hidden';
     return (): void => {
-      document.body.style.overflow = "unset";
+      document.body.style.overflow = 'unset';
     };
   }, [isOpen]);
 
@@ -39,10 +38,7 @@ const GenericModal = ({
     return null;
   }
   return (
-
-    
     <>
-
       <ReactPortal containerId="react-portal-modal-container">
         <div className="w-full">
           <div
