@@ -1,4 +1,5 @@
 import { FlagIcon } from '@/assets/icons';
+import { handleFlagProduct } from '@/services/apiService';
 import React, { useState } from 'react';
 
 export default function FlagProductModal({
@@ -10,31 +11,6 @@ export default function FlagProductModal({
 }) {
   const [selectedOption, setSelectedOption] = useState<string>('');
   const [customOption, setCustomOption] = useState<string>('');
-
-  const URL = '';
-
-  const handleFlagProduct = async function () {
-    const response = await fetch(URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        product_id,
-        flag_reason: selectedOption || customOption,
-      }),
-    });
-
-    if (!response.ok) {
-      const errorBody = await response.json();
-      console.error('Error Response:', errorBody);
-      throw new Error(
-        `Failed to flag product: ${errorBody.message || response.statusText}`
-      );
-    }
-
-    return await response.json();
-  };
 
   const flagOptions = [
     {
@@ -107,7 +83,9 @@ export default function FlagProductModal({
           </button>
           <button
             className="py-3 lg:py-[15px] bg-[#343131] rounded-lg lg:rounded-2xl"
-            onSubmit={handleFlagProduct}
+            onSubmit={() =>
+              handleFlagProduct(product_id, selectedOption || customOption)
+            }
           >
             Submit
           </button>
