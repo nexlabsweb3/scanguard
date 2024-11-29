@@ -6,12 +6,12 @@ import HeroSection from '@/components/HeroSection';
 export default function Home() {
   return (
     <main className="">
-      <div>
+      <section className='bg-mainBg bg-cover pt-36 pb-5'>
         <header className="container mx-auto">
           <HeroSection />
         </header>
-      </div>
-      <main className="container mx-auto">
+      </section>
+      <main className="">
         <ContentSection />
       </main>
     </main>

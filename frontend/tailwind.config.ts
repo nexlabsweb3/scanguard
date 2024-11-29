@@ -9,7 +9,9 @@ const config: Config = {
   theme: {
     extend: {
       backgroundImage: {
-        mainBg: "url('/Landing page.png')",
+        mainBg: "url('/HeroTopBg.png')",
+        HeroMidBg: "url('/manufacturer-bg.png')",
+        HeroBottomBg: "url('/HeroBottomBg.png')",
         hero: "url('/hero-bg.png')",
         producer: "url('/producer-bg.png')",
         'hero-2': "url('/hero-bg-mobile.png')",
