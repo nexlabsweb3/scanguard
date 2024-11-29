@@ -10,6 +10,7 @@ import { fetchIpfsFile } from '@/services/apiService';
 import { useAccount, useReadContract } from '@starknet-react/core';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'next/navigation';
+import Image from 'next/image';
 import Modal from '@/app/Modal';
 import { abi } from '@/lib/abi';
 type ProductProps = {
