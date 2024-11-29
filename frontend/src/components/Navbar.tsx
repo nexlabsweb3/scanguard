@@ -11,9 +11,9 @@ const NavBar = (props: any) => {
   return (
     <nav
       className={`flex items-center justify-between px-4 lg:px-20
-        xl:px-0 2xl:px-0 py-4 mb-12 container mx-auto font-roboto
+        xl:px-0 2xl:px-0 py-4 mb-4 container mx-auto font-roboto
         bg-[#1e1e1e]/80 backdrop-blur-sm sticky top-0 z-10
-        lg:absolute left-[50%] right-[50%] lg:bg-transparent lg:-translate-x-[50%] lg:pt-10`}
+        lg:absolute lg:left-[50%] lg:right-[50%] lg:bg-transparent lg:-translate-x-[50%] lg:pt-10`}
       {...props}
     >
       <div className="flex items-center gap-14">
