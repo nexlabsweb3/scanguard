@@ -8,13 +8,13 @@ import { IoMdMenu, IoMdClose } from 'react-icons/io';
 import { FaPlus } from 'react-icons/fa';
 import girl from '@/assets/girl1.png';
 import boy from '@/assets/girl1.png';
-import icon from '@/assets/icon1.png';
+import icon from '@/assets/icon1.ico';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-const AddEventModal = ({
+const AddProductModal = ({
   isOpen,
   onClose,
 }: {
@@ -77,11 +77,11 @@ const AddEventModal = ({
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className="bg-white w-full max-w-lg rounded-xl shadow-lg p-6">
+      <div className="bg-white w-full max-w-lg md:max-w-xl sm:mx-4 rounded-xl shadow-lg p-6">
         <div className="flex items-center justify-between border-b pb-3">
           <h2 className="text-lg font-semibold flex items-center gap-2">
             <FaPlus className="text-black" />
-            Add Events
+            Add Product
           </h2>
           <button onClick={onClose}>
             <IoMdClose size={24} className="text-black" />
@@ -126,7 +126,7 @@ const AddEventModal = ({
               <p className="text-red-500 text-sm">Verification is required.</p>
             )}
           </div>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Date
@@ -169,7 +169,7 @@ const AddEventModal = ({
               type="submit"
               className="w-full bg-[#1e1e1e] text-white py-2 rounded-lg font-medium hover:bg-[#1e1e1e]/80"
             >
-              Add
+              Add Product
             </button>
           </div>
         </form>
@@ -181,19 +181,18 @@ const AddEventModal = ({
 const Dashboard = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [activePage, setActivePage] = useState(1);
+  const [activeMenu, setActiveMenu] = useState('menu');
 
   const handlePageClick = (page: React.SetStateAction<number>) => {
     setActivePage(page);
   };
-
-  const [activeMenu, setActiveMenu] = useState('menu');
 
   const handleMenuClick = (menu: React.SetStateAction<string>) => {
     setActiveMenu(menu);
   };
 
   return (
-    <div className="flex h-auto bg-[#FFFFFF]">
+    <div className="flex flex-col md:flex-row h-auto bg-[#FFFFFF]">
       <aside
         className="hidden md:block w-[100px] bg-[#1e1e1e] text-white"
         style={{ minHeight: '1014px' }}
@@ -205,13 +204,21 @@ const Dashboard = () => {
           <ul className="space-y-4">
             <li
               onClick={() => handleMenuClick('diamond')}
-              className={`flex items-center justify-center rounded-l-xl px-2 py-3 cursor-pointer ${activeMenu === 'diamond' ? 'bg-white text-black' : 'hover:bg-white hover:text-black'}`}
+              className={`flex items-center justify-center rounded-l-xl px-2 py-3 cursor-pointer ${
+                activeMenu === 'diamond'
+                  ? 'bg-white text-black'
+                  : 'hover:bg-white hover:text-black'
+              }`}
             >
               <BsFillXDiamondFill size={28} />
             </li>
             <li
               onClick={() => handleMenuClick('settings')}
-              className={`flex items-center justify-center rounded-l-xl px-2 py-3 cursor-pointer ${activeMenu === 'settings' ? 'bg-white text-black' : 'hover:bg-white hover:text-black'}`}
+              className={`flex items-center justify-center rounded-l-xl px-2 py-3 cursor-pointer ${
+                activeMenu === 'settings'
+                  ? 'bg-white text-black'
+                  : 'hover:bg-white hover:text-black'
+              }`}
             >
               <IoSettingsOutline size={28} />
             </li>
@@ -219,12 +226,8 @@ const Dashboard = () => {
         </nav>
       </aside>
 
-      <aside className="bg-[#1e1e1e] text-white w-16 flex items-center justify-center md:hidden">
-        <HiMenuAlt3 size={20} />
-      </aside>
-
       <main className="flex-1 overflow-auto bg-gray-200">
-        <header className="flex items-center justify-between bg-white p-4">
+        <header className="flex flex-wrap items-center justify-between bg-white p-4">
           <h1 className="text-xl font-bold">Inspection List</h1>
           <div className="flex items-center">
             <Image src={boy} alt="Avatar" className="w-8 h-8 rounded-full" />
@@ -239,12 +242,12 @@ const Dashboard = () => {
             <button className="bg-[#1e1e1e] text-white px-4 py-2 rounded-lg hover:bg-[#1e1e1e]/80">
               Upcoming
             </button>
-            <button className="bg-gray-100  text-black px-4 md:px-8 border border-gray-300 py-2 rounded-lg">
+            <button className="bg-gray-100 text-black px-4 md:px-8 border border-gray-300 py-2 rounded-lg">
               Post
             </button>
           </div>
-          <div className="flex-1 mx-4 ">
-            <div className="relative md:ml-20 ">
+          <div className="flex-1 mx-4">
+            <div className="relative">
               <IoSearchOutline className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500" />
               <input
                 type="text"
@@ -253,65 +256,67 @@ const Dashboard = () => {
               />
             </div>
           </div>
-          <div className="p-4">
+          <div>
             <button
               onClick={() => setModalOpen(true)}
               className="bg-[#1e1e1e] text-white px-4 py-2 rounded-lg font-medium hover:bg-[#1e1e1e]/80"
             >
-              Add Event
+              Add Product
             </button>
           </div>
         </header>
-        <AddEventModal
+        <AddProductModal
           isOpen={isModalOpen}
           onClose={() => setModalOpen(false)}
         />
 
-        <div className="py-10 mt-8 bg-gray-200 mx-4 overflow-auto">
-          <table className="w-full table-auto text-sm border-separate border-spacing-y-3">
+        <div className="py-10 mt-8 bg-gray-200 mx-4 overflow-x-auto">
+          <table className="w-full table-auto text-sm border-separate border-spacing-y-2 md:border-spacing-y-3">
             <thead>
-              <tr className="bg-white text-black">
-                <th className="p-4">Checks</th>
-                <th className="p-4">Dates</th>
-                <th className="p-4">Role</th>
-                <th className="p-4">Description</th>
+              <tr className="bg-white text-black text-xs md:text-sm">
+                <th className="p-2 md:p-4">Checks</th>
+                <th className="p-2 md:p-4 hidden sm:table-cell">Dates</th>
+                <th className="p-2 md:p-4">Role</th>
+                <th className="p-2 md:p-4 hidden sm:table-cell">Description</th>
               </tr>
             </thead>
             <tbody>
               {Array.from({ length: 10 }).map((_, idx) => (
                 <tr
                   key={idx}
-                  className={`text-black shadow-md hover:bg-gray-100 rounded-2xl overflow-hidden ${
+                  className={`text-black shadow-md hover:bg-gray-100 rounded-lg ${
                     idx % 2 === 0 ? 'bg-gray-50' : 'bg-white'
                   }`}
                 >
-                  <td className="p-4 flex items-center text-md font-poppins leading-5 font-medium">
+                  <td className="p-2 md:p-4 flex items-center text-xs md:text-sm font-poppins leading-5 font-medium break-words">
                     <input type="checkbox" className="mr-2" />
                     <Image
                       src={icon}
                       alt="Avatar"
                       width={30}
                       height={30}
-                      className="w-10 h-10 rounded-full mr-2"
+                      className="w-6 h-6 md:w-10 md:h-10 rounded-full mr-2"
                     />
-                    Take recent orders on Jumia
+                    <span className="truncate">
+                      Take recent orders on Jumia
+                    </span>
                   </td>
-                  <td className="p-4 text-md font-poppins leading-5 font-medium">
+                  <td className="p-2 md:p-4 text-xs md:text-sm font-poppins leading-5 font-medium hidden sm:table-cell">
                     August 23, 2023
                   </td>
-                  <td className="p-4 flex items-center text-md font-poppins leading-5 font-medium">
+                  <td className="p-2 md:p-4 flex items-center text-xs md:text-sm font-poppins leading-5 font-medium">
                     <Image
                       src={girl}
                       alt="Avatar"
                       width={30}
                       height={30}
-                      className="w-10 h-10 rounded-full mr-2"
+                      className="w-6 h-6 md:w-10 md:h-10 rounded-full mr-2"
                     />
-                    Doris K. John
+                    <span>Doris K. John</span>
                   </td>
-                  <td className="p-4 text-md font-poppins leading-5 font-medium">
+                  <td className="p-2 md:p-4 text-xs md:text-sm font-poppins leading-5 font-medium hidden sm:table-cell">
                     <p>. Required to look up items on Jumia</p>
-                    <p className="text-md">. Select required item and place</p>
+                    <p className="truncate">. Select required item and place</p>
                   </td>
                 </tr>
               ))}
@@ -319,7 +324,7 @@ const Dashboard = () => {
           </table>
         </div>
 
-        <div className="flex justify-center p-4">
+        <div className="flex flex-wrap justify-center items-center gap-2 p-4">
           <button className="px-4 py-2 mx-1 text-gray-600 hover:bg-[#1e1e1e] hover:text-white">
             &laquo;
           </button>
@@ -327,13 +332,15 @@ const Dashboard = () => {
             <button
               key={page}
               onClick={() => handlePageClick(page)}
-              className={`px-4 py-2 mx-1 border border-gray-300 rounded-md text-gray-600 
-            ${activePage === page ? 'bg-[#1e1e1e] text-white' : 'hover:bg-[#1e1e1e] hover:text-white'}`}
+              className={`px-4 py-2 mx-1 border border-gray-300 rounded-md text-gray-600 ${
+                activePage === page
+                  ? 'bg-[#1e1e1e] text-white'
+                  : 'hover:bg-[#1e1e1e] hover:text-white'
+              }`}
             >
               {page}
             </button>
           ))}
-
           <button className="px-4 py-2 mx-1 text-gray-600 hover:bg-[#1e1e1e] hover:text-white">
             &raquo;
           </button>
