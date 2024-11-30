@@ -51,7 +51,7 @@ export const fetchProductDetails = async (productId: string) => {
     }
     return await response.json();
   } catch (error) {
-    console.error('Error fetching product details:', error.message);
+    console.error('Error fetching product details:', error);
     throw error;
   }
 };

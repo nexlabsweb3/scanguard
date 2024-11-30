@@ -1,12 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 type ProductDetails = {
-    product_id: string;
-    name: string;
-    image: string;
-    manufacturer: string;
-    manufactureDate: string;
-    expiryDate: string;
+  product_id: string;
+  name: string;
+  image: string;
+  manufacturer: string;
+  manufactureDate: string;
+  expiryDate: string;
 };
 
 type ErrorResponse = {
@@ -34,7 +34,9 @@ export default async function handler(
 
     if (!response.ok) {
       const errorBody = await response.json();
-      return res.status(response.status).json({ error: errorBody.error || 'Failed to fetch product details' });
+      return res
+        .status(response.status)
+        .json({ error: errorBody.error || 'Failed to fetch product details' });
     }
 
     const productDetails: ProductDetails = await response.json();

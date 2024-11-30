@@ -22,7 +22,7 @@ type ProductProps = {
 };
 
 export default function ScanProduct() {
-  const [productId, setProductId] = useState<string>("");
+  const [productId, setProductId] = useState<string>('');
   const [product, setProduct] = useState<ProductProps | any>();
   const [contractData, setContractData] = useState<{
     product_id: string;
@@ -39,7 +39,7 @@ export default function ScanProduct() {
     const fetchData = async () => {
       try {
         if (payload) {
-          const product = await fetchProductDetails(payload.productId);
+          const product = await fetchProductDetails(payload[0]);
           setProductId(product.productId);
         }
       } catch (e) {
