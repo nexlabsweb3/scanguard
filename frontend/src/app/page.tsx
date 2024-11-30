@@ -8,8 +8,10 @@ import Layout from './Home/layout';
 export default function Home() {
   const router = useRouter();
 
-  return <Layout>
-    <HeroSection />
-    <ContentSection />
-  </Layout>
+  return (
+    <Layout>
+      <HeroSection />
+      <ContentSection />
+    </Layout>
+  );
 }
