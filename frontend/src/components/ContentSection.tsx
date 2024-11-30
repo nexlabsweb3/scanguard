@@ -13,17 +13,17 @@ import { poppins, roboto } from '@/app/fonts';
 
 const ContentSection = () => (
   <section className="">
-    <div className='bg-manufacturer-bg bg-cover bg-center py-10'>
-   <div className='container mx-auto'>
-   <ContentHeader />
-    <ContentCTA />
-    <ContentCTAMobile />
-   </div>
+    <div className="bg-manufacturer-bg bg-cover bg-center py-10">
+      <div className="container mx-auto">
+        <ContentHeader />
+        <ContentCTA />
+        <ContentCTAMobile />
+      </div>
     </div>
-    <div className='bg-HeroBottomBg bg-cover'>
-    <div className='mx-auto container'>
-    <GuideContent />
-    </div>
+    <div className="bg-HeroBottomBg bg-cover">
+      <div className="mx-auto container">
+        <GuideContent />
+      </div>
     </div>
   </section>
 );
