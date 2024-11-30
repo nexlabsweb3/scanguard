@@ -42,3 +42,16 @@ export const handleFlagProduct = async function (
 
   return await response.json();
 };
+
+export const fetchProductDetails = async (productId: string) => {
+  try {
+    const response = await fetch(`/api/product/${productId}`);
+    if (!response.ok) {
+      throw new Error(await response.text());
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching product details:', error.message);
+    throw error;
+  }
+};
