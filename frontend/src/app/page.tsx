@@ -2,18 +2,16 @@
 
 import ContentSection from '@/components/ContentSection';
 import HeroSection from '@/components/HeroSection';
+import { useRouter } from 'next/navigation';
+import Layout from './Home/layout';
 
 export default function Home() {
+  const router = useRouter();
+
   return (
-    <main className="">
-      <div>
-        <header className="container mx-auto">
-          <HeroSection />
-        </header>
-      </div>
-      <main className="container mx-auto">
-        <ContentSection />
-      </main>
-    </main>
+    <Layout>
+      <HeroSection />
+      <ContentSection />
+    </Layout>
   );
 }

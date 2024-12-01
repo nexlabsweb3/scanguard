@@ -7,8 +7,36 @@ import {
   MapIcon,
   PhotoIcon,
 } from '@heroicons/react/24/outline';
+import { useState } from 'react';
+import { handleSubmit } from '../../app/manufacturer/account/api_service';
+import { useAlert } from '../../hooks/useAlert';
 
 export default function ManufacturerForm() {
+  const [companyName, setCompanyName] = useState('');
+  const [manufacturerName, setManufacturerName] = useState('');
+  const [address, setAddress] = useState('');
+  const [email, setEmail] = useState('');
+  const [registrationCode, setRegistrationCode] = useState('');
+  const [phone, setPhone] = useState('');
+  const [registrationImage, setRegistrationImage] = useState<File | null>(null);
+  const { showAlert } = useAlert();
+
+  const onSubmit = async (e: React.FormEvent) => {
+    try {
+      await handleSubmit(e, {
+        name: companyName,
+        address: address,
+        email: email,
+        rc: registrationCode,
+        phone: phone,
+        registrationImage: registrationImage || undefined,
+      });
+      showAlert('success', 'Manufacturer registered successfully!');
+    } catch (error) {
+      showAlert('error', 'Failed to register manufacturer. Please try again.');
+    }
+  };
+
   return (
     <div className=" w-[52rem] space-y-8">
       <div className="text-center">
@@ -19,7 +47,10 @@ export default function ManufacturerForm() {
           Enter your Manufacturer details to get started!
         </p>
       </div>
-      <form className="mt-8 space-y-6 bg-white/10 backdrop-blur-md rounded-3xl p-8 shadow-xl border border-gray-700">
+      <form
+        onSubmit={onSubmit}
+        className="mt-8 space-y-6 bg-white/10 backdrop-blur-md rounded-3xl p-8 shadow-xl border border-gray-700"
+      >
         <div className="space-y-6">
           <div>
             <label
@@ -40,6 +71,8 @@ export default function ManufacturerForm() {
                 name="companyName"
                 type="text"
                 required
+                value={companyName}
+                onChange={(e) => setCompanyName(e.target.value)}
                 className="block w-full pl-10 pr-3 py-2 border border-gray-600 rounded-xl bg-black/30 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition duration-150 ease-in-out sm:text-sm text-white"
                 placeholder="Enter company name"
               />
@@ -65,6 +98,8 @@ export default function ManufacturerForm() {
                 name="manufacturerName"
                 type="text"
                 required
+                value={manufacturerName}
+                onChange={(e) => setManufacturerName(e.target.value)}
                 className="block w-full pl-10 pr-3 py-2 border border-gray-600 rounded-xl bg-black/30 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition duration-150 ease-in-out sm:text-sm text-white"
                 placeholder="Enter manufacturer name"
               />
@@ -87,6 +122,8 @@ export default function ManufacturerForm() {
                 name="address"
                 type="text"
                 required
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
                 className="block w-full pl-10 pr-3 py-2 border border-gray-600 rounded-xl bg-black/30 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition duration-150 ease-in-out sm:text-sm text-white"
                 placeholder="Enter company address"
               />
@@ -112,6 +149,8 @@ export default function ManufacturerForm() {
                 name="email"
                 type="email"
                 required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="block w-full pl-10 pr-3 py-2 border border-gray-600 rounded-xl bg-black/30 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition duration-150 ease-in-out sm:text-sm text-white"
                 placeholder="Enter company email"
               />
@@ -137,6 +176,8 @@ export default function ManufacturerForm() {
                 name="rc"
                 type="text"
                 required
+                value={registrationCode}
+                onChange={(e) => setRegistrationCode(e.target.value)}
                 className="block w-full pl-10 pr-3 py-2 border border-gray-600 rounded-xl bg-black/30 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition duration-150 ease-in-out sm:text-sm text-white"
                 placeholder="Enter registration code"
               />
@@ -162,6 +203,8 @@ export default function ManufacturerForm() {
                 name="phone"
                 type="tel"
                 required
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
                 className="block w-full pl-10 pr-3 py-2 border border-gray-600 rounded-xl bg-black/30 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition duration-150 ease-in-out sm:text-sm text-white"
                 placeholder="Enter phone number"
               />
@@ -186,6 +229,9 @@ export default function ManufacturerForm() {
               type="file"
               accept="image/*"
               required
+              onChange={(e) =>
+                setRegistrationImage(e.target.files?.[0] || null)
+              }
               className="block w-full pl-10 pr-3 py-2 border border-gray-600 rounded-xl bg-black/30 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-orange-500 focus:border-orange-500 transition duration-150 ease-in-out sm:text-sm text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-orange-500 file:text-white hover:file:bg-orange-600"
             />
           </div>
