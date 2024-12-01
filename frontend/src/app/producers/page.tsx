@@ -104,8 +104,8 @@ export default function Home() {
             className="w-full h-full object-cover"
             src="/bottle.png"
             alt="bottles"
-            width={500}  
-            height={500} 
+            width={500}
+            height={500}
           />
         </div>
       </div>
