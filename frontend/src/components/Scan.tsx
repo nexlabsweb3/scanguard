@@ -6,7 +6,7 @@ import {
   StarIcon2,
 } from '@/assets/icons';
 import { CONTRACT_ADDR, formatDate, formatIpfsHash } from '@/lib/config';
-import { fetchIpfsFile } from '@/services/apiService';
+import { fetchIpfsFile, fetchProductDetails } from '@/services/apiService';
 import { useAccount, useReadContract } from '@starknet-react/core';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'next/navigation';
@@ -22,6 +22,7 @@ type ProductProps = {
 };
 
 export default function ScanProduct() {
+  const [productId, setProductId] = useState<string>('');
   const [product, setProduct] = useState<ProductProps | any>();
   const [contractData, setContractData] = useState<{
     product_id: string;
@@ -34,13 +35,28 @@ export default function ScanProduct() {
   const { address } = useAccount();
   let payload = params?.product;
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (payload) {
+          const product = await fetchProductDetails(payload[0]);
+          setProductId(product.productId);
+        }
+      } catch (e) {
+        console.error('Error fetching from Product:', e);
+      }
+    };
+
+    fetchData();
+  }, [payload]);
+
   const toggleUserModal = () => {
     setOpenWallet((prev) => !prev);
   };
 
   const { data } = useReadContract({
     functionName: 'verify',
-    args: [payload.toString()],
+    args: [productId],
     abi,
     address: CONTRACT_ADDR,
     watch: true,
