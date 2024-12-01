@@ -15,3 +15,43 @@ export const fetchIpfsFile = async (file: string) => {
     throw error; // Re-throw the error for further handling if necessary
   }
 };
+
+const URL = '';
+export const handleFlagProduct = async function (
+  product_id: string,
+  flag_reason: string
+) {
+  const response = await fetch(URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      product_id,
+      flag_reason,
+    }),
+  });
+
+  if (!response.ok) {
+    const errorBody = await response.json();
+    console.error('Error Response:', errorBody);
+    throw new Error(
+      `Failed to flag product: ${errorBody.message || response.statusText}`
+    );
+  }
+
+  return await response.json();
+};
+
+export const fetchProductDetails = async (productId: string) => {
+  try {
+    const response = await fetch(`/api/product/${productId}`);
+    if (!response.ok) {
+      throw new Error(await response.text());
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching product details:', error);
+    throw error;
+  }
+};

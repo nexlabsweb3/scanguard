@@ -3,8 +3,6 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { StarknetProvider } from '@/components/StarknetProvider';
 import { bowlby_one, poppins, roboto } from './fonts';
-import Footer from '@/components/Footer';
-import NavBar from '@/components/Navbar';
 import Alert from '@/components/Alert';
 import { AlertProvider } from '@/hooks/useAlert';
 
@@ -28,11 +26,9 @@ export default function RootLayout({
       >
         <StarknetProvider>
           <AlertProvider>
-            <NavBar />
             {children}
 
             <Alert />
-            <Footer />
           </AlertProvider>
         </StarknetProvider>
       </body>

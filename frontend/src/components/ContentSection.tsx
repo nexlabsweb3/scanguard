@@ -125,9 +125,13 @@ const ContentCTAMobile = () => (
 
 const VideoComponent = () => (
   <div className="w-[22rem] h-[31rem] lg:h-[36.5rem] rounded-2xl">
-    <video controls className="w-full h-full object-cover rounded-2xl">
-      <source src="" type="" />
-    </video>
+    <iframe
+      className="w-full h-full rounded-2xl"
+      src="https://www.youtube.com/embed/j99jT-Ljusg"
+      title="YouTube video player"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen
+    ></iframe>
   </div>
 );
 
