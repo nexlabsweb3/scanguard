@@ -7,8 +7,9 @@ import {
   MapIcon,
   PhotoIcon,
 } from '@heroicons/react/24/outline';
-import { useState, FormEvent } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
+import { handleSubmit } from '../../app/manufacturer/account/api_service';
+import { useAlert } from '../../hooks/useAlert';
 
 export default function ManufacturerForm() {
   const [companyName, setCompanyName] = useState('');
@@ -18,37 +19,21 @@ export default function ManufacturerForm() {
   const [registrationCode, setRegistrationCode] = useState('');
   const [phone, setPhone] = useState('');
   const [registrationImage, setRegistrationImage] = useState<File | null>(null);
+  const { showAlert } = useAlert();
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-
-    const formData = new FormData();
-    formData.append('name', companyName);
-    formData.append('manufacturerName', manufacturerName);
-    formData.append('address', address);
-    formData.append('email', email);
-    formData.append('rc', registrationCode);
-    formData.append('phone', phone);
-    if (registrationImage) {
-      formData.append('registrationImage', registrationImage);
-    }
-
+  const onSubmit = async (e: React.FormEvent) => {
     try {
-      // Todo manufacturer api endpoint would change
-      const response = await axios.post('/api/manufacturers', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+      await handleSubmit(e, {
+        name: companyName,
+        address: address,
+        email: email,
+        rc: registrationCode,
+        phone: phone,
+        registrationImage: registrationImage || undefined,
       });
-
-      if (response.status !== 200) {
-        // Todo handle error
-        throw new Error('Failed to create manufacturer');
-      }
-      // Todo handle success
+      showAlert('success', 'Manufacturer registered successfully!');
     } catch (error) {
-      // Todo handle error
-      console.error('Error creating manufacturer:', error);
+      showAlert('error', 'Failed to register manufacturer. Please try again.');
     }
   };
 
@@ -63,7 +48,7 @@ export default function ManufacturerForm() {
         </p>
       </div>
       <form
-        onSubmit={handleSubmit}
+        onSubmit={onSubmit}
         className="mt-8 space-y-6 bg-white/10 backdrop-blur-md rounded-3xl p-8 shadow-xl border border-gray-700"
       >
         <div className="space-y-6">
