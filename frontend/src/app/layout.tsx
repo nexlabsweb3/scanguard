@@ -7,7 +7,6 @@ import Alert from '@/components/Alert';
 import { AlertProvider } from '@/hooks/useAlert';
 import { themeScript } from './theme-script';
 
-
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
