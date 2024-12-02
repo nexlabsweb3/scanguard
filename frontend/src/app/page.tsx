@@ -9,8 +9,7 @@ export default function Home() {
   const router = useRouter();
 
   return (
-    
-     <Layout>
+    <Layout>
       <main className="">
         <section className="bg-mainBg bg-cover lg:pt-36 pb-5">
           <header className="container mx-auto">
@@ -21,6 +20,6 @@ export default function Home() {
           <ContentSection />
         </main>
       </main>
-     </Layout>
+    </Layout>
   );
 }
