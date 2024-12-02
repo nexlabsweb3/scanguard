@@ -4,6 +4,8 @@ import { BrandImage } from '@/assets/landing-page';
 import Link from 'next/link';
 import ConnectWallet from './ConnectWallet';
 import { roboto } from '@/app/fonts';
+import ThemeToggle from './ThemeToggle';
+import { ScanIcon } from '@/assets/icons';
 import { useAlert } from '@/hooks/useAlert';
 import { useAccount } from '@starknet-react/core';
 import WalletBar from './WalletBar';
@@ -40,7 +42,7 @@ const navItems = [
 
 const NavLinks = () => (
   <ul
-    className={`${roboto.variable} text-sm text-textPrimary leading-normal
+    className={`${roboto.variable} text-sm text-textPrimary-light dark:text-textPrimary leading-normal
       font-roboto uppercase hidden py-3 gap-6 items-center lg:flex`}
   >
     {navItems.map((item, index) => (

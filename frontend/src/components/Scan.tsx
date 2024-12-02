@@ -10,6 +10,7 @@ import { fetchIpfsFile, fetchProductDetails } from '@/services/apiService';
 import { useAccount, useReadContract } from '@starknet-react/core';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'next/navigation';
+import Image from 'next/image';
 import Modal from '@/app/Modal';
 import { abi } from '@/lib/abi';
 type ProductProps = {
@@ -109,10 +110,12 @@ export default function ScanProduct() {
                   </p>
                 </div>
                 <div className="col-span-2 w-full h-full">
-                  <img
-                    src={product?.image}
+                  <Image
+                    src={product?.image || '/placeholder-product.png'} // Add fallback image
                     className="w-full h-full object-cover"
                     alt="product-image"
+                    width={500}
+                    height={500}
                   />
                   {/* <div className="flex items-center justify-between pt-5">
 										<div className="space-y-2 flex items-center justify-center flex-col">
@@ -211,7 +214,12 @@ export default function ScanProduct() {
                 </p>
 
                 <div className="">
-                  <img src={product?.image} alt="product-image" />
+                  <Image
+                    src={product?.image || '/placeholder-product.png'}
+                    alt="product-image"
+                    width={300} // Add appropriate width
+                    height={300} // Add appropriate height
+                  />
                   <div className="flex items-center justify-between pt-5">
                     {/* <div className="space-y-2 flex items-center justify-center flex-col">
 											<ScanIcon2 />
