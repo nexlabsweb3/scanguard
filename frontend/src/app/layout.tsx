@@ -5,6 +5,8 @@ import { StarknetProvider } from '@/components/StarknetProvider';
 import { bowlby_one, poppins, roboto } from './fonts';
 import Alert from '@/components/Alert';
 import { AlertProvider } from '@/hooks/useAlert';
+import { themeScript } from './theme-script';
+
 
 const inter = Inter({ subsets: ['latin'] });
 
