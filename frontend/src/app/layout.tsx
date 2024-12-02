@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${inter.className} ${poppins.variable}
-         ${bowlby_one.variable} ${roboto.variable} bg-secondary`}
+         ${bowlby_one.variable} ${roboto.variable} bg-secondary `}
       >
         <StarknetProvider>
           <AlertProvider>

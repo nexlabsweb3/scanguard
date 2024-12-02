@@ -12,11 +12,19 @@ import ScanButton from './ScanButton';
 import { poppins, roboto } from '@/app/fonts';
 
 const ContentSection = () => (
-  <section className="my-[7.5rem] md:my-[6.5rem]">
-    <ContentHeader />
-    <ContentCTA />
-    <ContentCTAMobile />
-    <GuideContent />
+  <section className="">
+    <div className="bg-manufacturer-bg bg-cover bg-center py-10">
+      <div className="container mx-auto">
+        <ContentHeader />
+        <ContentCTA />
+        <ContentCTAMobile />
+      </div>
+    </div>
+    <div className="bg-HeroBottomBg bg-cover">
+      <div className="mx-auto container">
+        <GuideContent />
+      </div>
+    </div>
   </section>
 );
 
@@ -140,7 +148,7 @@ const AuthenticityParagraph = () => (
 const GuideContent = () => (
   <div
     className={`relative flex flex-col lg:flex-row justify-center
-      items-center gap-6 lg:gap-32 my-28 px-8
+      items-center gap-6 lg:gap-32 mb-28 px-8
       shadow-2xl rounded-2xl bg-[#232323] py-12
       lg:shadow-none lg:rounded-none lg:bg-inherit lg:py-0`}
   >
