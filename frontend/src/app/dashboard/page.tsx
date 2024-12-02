@@ -194,7 +194,7 @@ const Dashboard = () => {
   const [activeMenu, setActiveMenu] = useState('menu');
   const [products, setProducts] = useState<ProductDetails[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const manufacturerId = "12"
+  const manufacturerId = '12';
 
   useEffect(() => {
     const fetchProducts = async () => {
