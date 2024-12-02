@@ -188,12 +188,13 @@ const AddProductModal = ({
   );
 };
 
-const Dashboard = ({ manufacturerId }: { manufacturerId: string }) => {
+const Dashboard = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [activePage, setActivePage] = useState(1);
   const [activeMenu, setActiveMenu] = useState('menu');
   const [products, setProducts] = useState<ProductDetails[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const manufacturerId = "12"
 
   useEffect(() => {
     const fetchProducts = async () => {
