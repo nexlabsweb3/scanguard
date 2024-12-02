@@ -15,7 +15,6 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { getRegisteredProductsByManufacturer } from '@/services/apiService';
 
-
 type ProductDetails = {
   product_id: string;
   name: string;
@@ -358,7 +357,7 @@ const Dashboard = ({ manufacturerId }: { manufacturerId: string }) => {
                   ))}
                 </>
               ) : (
-                <div className='text-center'>No products found.</div>
+                <div className="text-center">No products found.</div>
               )}
             </tbody>
           </table>
