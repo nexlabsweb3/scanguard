@@ -55,3 +55,18 @@ export const fetchProductDetails = async (productId: string) => {
     throw error;
   }
 };
+
+const BASE_URL = process.env.BACKEND_BASE_URL || 'http://localhost:3000';
+
+export const getRegisteredProductsByManufacturer = async (
+  manufacturerId: string
+) => {
+  try {
+    const response = await fetch(
+      `${BASE_URL}/manufacturer-products/${manufacturerId}`
+    );
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching product details:', error);
+  }
+};

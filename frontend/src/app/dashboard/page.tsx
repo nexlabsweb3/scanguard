@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BsFillXDiamondFill } from 'react-icons/bs';
 import { HiMenuAlt3 } from 'react-icons/hi';
 import { IoSearchOutline, IoSettingsOutline } from 'react-icons/io5';
@@ -13,6 +13,16 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { getRegisteredProductsByManufacturer } from '@/services/apiService';
+
+type ProductDetails = {
+  product_id: string;
+  name: string;
+  image: string;
+  manufacturer: string;
+  manufactureDate: string;
+  expiryDate: string;
+};
 
 const AddProductModal = ({
   isOpen,
@@ -182,6 +192,30 @@ const Dashboard = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [activePage, setActivePage] = useState(1);
   const [activeMenu, setActiveMenu] = useState('menu');
+  const [products, setProducts] = useState<ProductDetails[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const manufacturerId = '12';
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        setLoading(true);
+        const fetchedProducts =
+          await getRegisteredProductsByManufacturer(manufacturerId);
+        if (fetchedProducts) {
+          setProducts(fetchedProducts);
+        }
+      } catch (err) {
+        console.error('Error fetching products:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (manufacturerId) {
+      fetchProducts();
+    }
+  }, [manufacturerId]);
 
   const handlePageClick = (page: React.SetStateAction<number>) => {
     setActivePage(page);
@@ -274,77 +308,85 @@ const Dashboard = () => {
           <table className="w-full table-auto text-sm border-separate border-spacing-y-2 md:border-spacing-y-3">
             <thead>
               <tr className="bg-white text-black text-xs md:text-sm">
-                <th className="p-2 md:p-4">Checks</th>
-                <th className="p-2 md:p-4 hidden sm:table-cell">Dates</th>
-                <th className="p-2 md:p-4">Role</th>
-                <th className="p-2 md:p-4 hidden sm:table-cell">Description</th>
+                <th className="p-2 md:p-4">ID</th>
+                <th className="p-2 md:p-4 hidden sm:table-cell">Name</th>
+                <th className="p-2 md:p-4">Image</th>
+                <th className="p-2 md:p-4 hidden sm:table-cell">
+                  Manufacturer
+                </th>
+                <th className="p-2 md:p-4 hidden sm:table-cell">
+                  Manufactured Date
+                </th>
+                <th className="p-2 md:p-4 hidden sm:table-cell">Expiry Date</th>
               </tr>
             </thead>
             <tbody>
-              {Array.from({ length: 10 }).map((_, idx) => (
-                <tr
-                  key={idx}
-                  className={`text-black shadow-md hover:bg-gray-100 rounded-lg ${
-                    idx % 2 === 0 ? 'bg-gray-50' : 'bg-white'
-                  }`}
-                >
-                  <td className="p-2 md:p-4 flex items-center text-xs md:text-sm font-poppins leading-5 font-medium break-words">
-                    <input type="checkbox" className="mr-2" />
-                    <Image
-                      src={icon}
-                      alt="Avatar"
-                      width={30}
-                      height={30}
-                      className="w-6 h-6 md:w-10 md:h-10 rounded-full mr-2"
-                    />
-                    <span className="truncate">
-                      Take recent orders on Jumia
-                    </span>
-                  </td>
-                  <td className="p-2 md:p-4 text-xs md:text-sm font-poppins leading-5 font-medium hidden sm:table-cell">
-                    August 23, 2023
-                  </td>
-                  <td className="p-2 md:p-4 flex items-center text-xs md:text-sm font-poppins leading-5 font-medium">
-                    <Image
-                      src={girl}
-                      alt="Avatar"
-                      width={30}
-                      height={30}
-                      className="w-6 h-6 md:w-10 md:h-10 rounded-full mr-2"
-                    />
-                    <span>Doris K. John</span>
-                  </td>
-                  <td className="p-2 md:p-4 text-xs md:text-sm font-poppins leading-5 font-medium hidden sm:table-cell">
-                    <p>. Required to look up items on Jumia</p>
-                    <p className="truncate">. Select required item and place</p>
-                  </td>
-                </tr>
-              ))}
+              {products && products.length > 0 ? (
+                <>
+                  {products.map((product, idx) => (
+                    <tr
+                      key={idx}
+                      className={`text-black shadow-md hover:bg-gray-100 rounded-lg ${
+                        idx % 2 === 0 ? 'bg-gray-50' : 'bg-white'
+                      }`}
+                    >
+                      <td className="p-2 md:p-4 flex items-center text-xs md:text-sm font-poppins leading-5 font-medium break-words">
+                        {product.product_id}
+                      </td>
+                      <td className="p-2 md:p-4 text-xs md:text-sm font-poppins leading-5 font-medium hidden sm:table-cell">
+                        {product.name}
+                      </td>
+                      <td className="p-2 md:p-4 flex items-center text-xs md:text-sm font-poppins leading-5 font-medium">
+                        <Image
+                          src={product.image}
+                          alt="product image"
+                          width={30}
+                          height={30}
+                          className="w-6 h-6 md:w-10 md:h-10 rounded-full mr-2"
+                        />
+                      </td>
+                      <td className="p-2 md:p-4 text-xs md:text-sm font-poppins leading-5 font-medium hidden sm:table-cell">
+                        <p>{product.manufacturer}</p>
+                      </td>
+                      <td className="p-2 md:p-4 text-xs md:text-sm font-poppins leading-5 font-medium hidden sm:table-cell">
+                        <p>{product.manufactureDate}</p>
+                      </td>
+                      <td className="p-2 md:p-4 text-xs md:text-sm font-poppins leading-5 font-medium hidden sm:table-cell">
+                        <p>{product.expiryDate}</p>
+                      </td>
+                    </tr>
+                  ))}
+                </>
+              ) : (
+                <div className="text-center">No products found.</div>
+              )}
             </tbody>
           </table>
         </div>
 
-        <div className="flex flex-wrap justify-center items-center gap-2 p-4">
-          <button className="px-4 py-2 mx-1 text-gray-600 hover:bg-[#1e1e1e] hover:text-white">
-            &laquo;
-          </button>
-          {[1, 2, 3, 4, 5].map((page) => (
-            <button
-              key={page}
-              onClick={() => handlePageClick(page)}
-              className={`px-4 py-2 mx-1 border border-gray-300 rounded-md text-gray-600 ${
-                activePage === page
-                  ? 'bg-[#1e1e1e] text-white'
-                  : 'hover:bg-[#1e1e1e] hover:text-white'
-              }`}
-            >
-              {page}
+        {products.length >= 1 && (
+          <div className="flex flex-wrap justify-center items-center gap-2 p-4">
+            <button className="px-4 py-2 mx-1 text-gray-600 hover:bg-[#1e1e1e] hover:text-white">
+              &laquo;
             </button>
-          ))}
-          <button className="px-4 py-2 mx-1 text-gray-600 hover:bg-[#1e1e1e] hover:text-white">
-            &raquo;
-          </button>
-        </div>
+            {[1, 2, 3, 4, 5].map((page) => (
+              <button
+                key={page}
+                onClick={() => handlePageClick(page)}
+                className={`px-4 py-2 mx-1 border border-gray-300 rounded-md text-gray-600 ${
+                  activePage === page
+                    ? 'bg-[#1e1e1e] text-white'
+                    : 'hover:bg-[#1e1e1e] hover:text-white'
+                }`}
+              >
+                {page}
+              </button>
+            ))}
+            <button className="px-4 py-2 mx-1 text-gray-600 hover:bg-[#1e1e1e] hover:text-white">
+              &raquo;
+            </button>
+          </div>
+        )}
       </main>
     </div>
   );
