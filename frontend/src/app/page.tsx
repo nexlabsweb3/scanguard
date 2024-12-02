@@ -10,8 +10,16 @@ export default function Home() {
 
   return (
     <Layout>
-      <HeroSection />
-      <ContentSection />
+      <main className="">
+        <section className="bg-mainBg bg-cover lg:pt-36 pb-5">
+          <header className="container mx-auto">
+            <HeroSection />
+          </header>
+        </section>
+        <main className="">
+          <ContentSection />
+        </main>
+      </main>
     </Layout>
   );
 }

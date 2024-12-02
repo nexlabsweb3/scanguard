@@ -25,10 +25,7 @@ export default function RootLayout({
       </head>
       <body
         className={`${inter.className} ${poppins.variable}
-         ${bowlby_one.variable} ${roboto.variable} 
-         bg-secondary-light dark:bg-secondary 
-         text-textPrimary-light dark:text-textPrimary
-         transition-colors duration-200`}
+         ${bowlby_one.variable} ${roboto.variable} bg-secondary `}
       >
         <StarknetProvider>
           <AlertProvider>
